@@ -1,0 +1,44 @@
+---
+version: "3.8"
+
+services:
+  dev_environment:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    user: dev
+    environment:
+      DB_JDBC: jdbc:postgresql
+      DB_HOSTNAME: postgres
+      DB_PORT: 5432
+      DB_NAME: hotel
+      DB_USER: admin
+      DB_PASSWORD: password
+    volumes:
+      - ..:/workspace:cached
+    command: sleep infinity
+    network_mode: service:postgres
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:latest
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: admin
+      POSTGRES_DB: hotel
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@hotel.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    network_mode: service:postgres
+    depends_on:
+      - postgres
+
+volumes:
+  postgres-data:

@@ -1,0 +1,12 @@
+[versions]
+postgresql = "42.6.0"
+slf4j-simple = "2.0.7"
+hikaricp = "5.0.1"
+
+[libraries]
+postgresql-driver = { module = "org.postgresql:postgresql", version.ref = "postgresql" }
+slf4j = { module = "org.slf4j:slf4j-simple", version.ref = "slf4j-simple" }
+hikaricp-pool = { module = "com.zaxxer:HikariCP", version.ref = "hikaricp" }
+
+[plugins]
+spotless = { id = "com.diffplug.spotless", version = "6.20.0" }

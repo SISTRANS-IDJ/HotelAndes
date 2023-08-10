@@ -1,0 +1,20 @@
+{
+  "name": "HotelAndes devcontainer",
+  "dockerComposeFile": "../docker-compose-postgres.yaml",
+  "service": "dev_environment",
+  "workspaceFolder": "/workspace",
+  "forwardPorts": [
+    80,
+    5432
+  ],
+  "customizations": {
+    "vscode": {
+      "settings": {},
+      "extensions": [
+        "vscjava.vscode-java-pack",
+        "vscjava.vscode-gradle",
+        "eamodio.gitlens"
+      ]
+    }
+  }
+}
