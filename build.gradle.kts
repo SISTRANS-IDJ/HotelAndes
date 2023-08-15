@@ -2,6 +2,7 @@ plugins {
     java
     application
     alias(libs.plugins.spotless)
+    alias(libs.plugins.flyway)
 }
 
 group = "edu.uniandes"
@@ -44,4 +45,10 @@ spotless {
     kotlinGradle {
 
     }
+}
+
+flyway {
+    url = "jdbc:postgresql://postgres:5432/hotel"
+    user = "admin"
+    password = "password"
 }
