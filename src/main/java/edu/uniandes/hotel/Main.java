@@ -56,10 +56,10 @@ public class Main {
         System.out.println(meta.getDriverVersion());
 
         var testname = "testuser";
-        var testpassword = "passworda";
 
         // insert
-        var insertStmt = c.prepareStatement("INSERT INTO hotel.user(username, password) VALUES( ?, ?);");
+     
+        var testpassword = "passworda";   var insertStmt = c.prepareStatement("INSERT INTO hotel.user(username, password) VALUES( ?, ?);");
         insertStmt.setString(1, testname);
         insertStmt.setString(2, testpassword);
 
