@@ -1,6 +1,7 @@
 plugins {
     java
-    application
+    alias(libs.plugins.springframework.boot)
+    alias(libs.plugins.spring.dependency.management)
     alias(libs.plugins.spotless)
     alias(libs.plugins.flyway)
 }
@@ -13,9 +14,7 @@ repositories {
 }
 
 dependencies {
-    runtimeOnly(libs.postgresql.driver)
-    implementation(libs.slf4j)
-    implementation(libs.hikaricp.pool)
+    implementation("org.springframework.boot:spring-boot-starter")
 }
 
 java {
@@ -23,11 +22,6 @@ java {
         languageVersion.set(JavaLanguageVersion.of(17))
         vendor.set(JvmVendorSpec.ADOPTIUM)
     }
-}
-
-application {
-    mainClass.set("edu.uniandes.hotel.Main")
-    mainModule.set("edu.uniandes.hotel")
 }
 
 tasks.compileJava {
@@ -45,10 +39,4 @@ spotless {
     kotlinGradle {
 
     }
-}
-
-flyway {
-    url = "jdbc:postgresql://postgres:5432/hotel"
-    user = "admin"
-    password = "password"
 }
