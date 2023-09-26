@@ -1,4 +1,4 @@
-package edu.uniandes.hotel;
+package edu.uniandes.hotelandes;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

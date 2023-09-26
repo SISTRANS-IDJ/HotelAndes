@@ -1,9 +1,8 @@
 plugins {
     java
-    alias(libs.plugins.springframework.boot)
-    alias(libs.plugins.spring.dependency.management)
-    alias(libs.plugins.spotless)
-    alias(libs.plugins.flyway)
+    id("org.springframework.boot") version "3.1.4"
+    id("io.spring.dependency-management") version "1.1.3"
+    id("com.diffplug.spotless") version "6.21.0"
 }
 
 group = "edu.uniandes"
@@ -14,7 +13,11 @@ repositories {
 }
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter")
+    implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    developmentOnly("org.springframework.boot:spring-boot-devtools")
+    runtimeOnly("com.oracle.database.jdbc:ojdbc11")
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
 java {
@@ -28,6 +31,10 @@ tasks.compileJava {
     options.encoding = "UTF-8"
     options.compilerArgs.add("-Xlint:unchecked")
     options.compilerArgs.add("-Xlint:deprecation")
+}
+
+tasks.withType<Test> {
+    useJUnitPlatform()
 }
 
 spotless {
