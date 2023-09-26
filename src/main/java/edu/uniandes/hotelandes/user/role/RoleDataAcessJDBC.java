@@ -2,6 +2,7 @@ package edu.uniandes.hotelandes.user.role;
 
 import java.util.List;
 import java.util.Optional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -10,6 +11,7 @@ public class RoleDataAcessJDBC implements RoleDAO {
 
   private final JdbcTemplate jdbcTemplate;
 
+  @Autowired
   public RoleDataAcessJDBC(JdbcTemplate jdbcTemplate) {
     this.jdbcTemplate = jdbcTemplate;
   }
@@ -29,13 +31,13 @@ public class RoleDataAcessJDBC implements RoleDAO {
 
   @Override
   public List<Role> selectRoles() {
-    var sql = "SELECT id, role, description FROM user_role";
+    final var sql = "SELECT id, role, description FROM user_role";
     return jdbcTemplate.query(sql, new UserRoleRowMapper());
   }
 
   @Override
   public int updateRole(short id, Role role) {
-    final var sql = "UPDATE user_role SET role.role = ?, role.description = ? WHERE id = ?";
+    final var sql = "UPDATE user_role SET role = ?, description = ? WHERE id = ?";
     return jdbcTemplate.update(sql, role.role(), role.description(), id);
   }
 

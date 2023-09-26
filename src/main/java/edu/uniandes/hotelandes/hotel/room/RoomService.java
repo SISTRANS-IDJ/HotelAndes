@@ -1,8 +1,7 @@
 package edu.uniandes.hotelandes.hotel.room;
 
-import java.util.List;
-
 import edu.uniandes.hotelandes.exception.NotFoundException;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,8 +29,8 @@ public class RoomService {
 
   public Room getRoom(Integer id) {
     return roomDAO
-            .selectRoomById(id)
-            .orElseThrow(() -> new NotFoundException(String.format("Room with id %s not found", id)));
+        .selectRoomById(id)
+        .orElseThrow(() -> new NotFoundException(String.format("Room with id %s not found", id)));
   }
 
   public List<Room> getRooms() {
@@ -54,14 +53,14 @@ public class RoomService {
   public void deleteRoom(Integer id) {
     final var rooms = roomDAO.selectRoomById(id);
     rooms.ifPresentOrElse(
-            room -> {
-              final var result = roomDAO.deleteRoom(id);
-              if (result != 1) {
-                throw new IllegalStateException("Could not delete room");
-              }
-            },
-            () -> {
-              throw new NotFoundException(String.format("Room with id %s not found", id));
-            });
+        room -> {
+          final var result = roomDAO.deleteRoom(id);
+          if (result != 1) {
+            throw new IllegalStateException("Could not delete room");
+          }
+        },
+        () -> {
+          throw new NotFoundException(String.format("Room with id %s not found", id));
+        });
   }
 }
