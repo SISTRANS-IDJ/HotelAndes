@@ -16,14 +16,9 @@ public class RoomService {
 
   public void createRoom(Room room) {
     // TODO: check RoomType exists
-    final var rooms = roomDAO.selectRoomById(room.id());
-    if (rooms.isEmpty()) {
-      final var r = roomDAO.insertRoom(room);
-      if (r != 1) {
-        throw new IllegalStateException("Room creation went wrong");
-      }
-    } else {
-      throw new IllegalStateException("Room already exists");
+    final var r = roomDAO.insertRoom(room);
+    if (r != 1) {
+      throw new IllegalStateException("Room creation went wrong");
     }
   }
 
@@ -42,7 +37,7 @@ public class RoomService {
     if (rooms.isPresent()) {
       final var r = roomDAO.updateRoom(id, room);
       if (r != 1) {
-        throw new IllegalStateException("Room creation went wrong");
+        throw new IllegalStateException("Room update went wrong");
       }
       return room;
     } else {

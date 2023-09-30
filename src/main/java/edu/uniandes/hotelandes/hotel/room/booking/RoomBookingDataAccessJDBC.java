@@ -35,7 +35,7 @@ public class RoomBookingDataAccessJDBC implements RoomBookingDAO {
   }
 
   @Override
-  public Optional<RoomBooking> selectRoomBookingsById(String id) {
+  public Optional<RoomBooking> selectRoomBookingById(String id) {
     final var sql =
         """
             SELECT
