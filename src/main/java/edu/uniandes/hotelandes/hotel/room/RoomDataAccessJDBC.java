@@ -17,27 +17,27 @@ public class RoomDataAccessJDBC implements RoomDAO {
 
   @Override
   public int insertRoom(Room room) {
-    final var sql = "INSERT INTO hotel_room(id, room_type_id) VALUES(?, ?)";
-    return jdbcTemplate.update(sql, room.id(), room.roomTypeId());
+    final var sql = "INSERT INTO hotel_room(name, room_type_id) VALUES(?, ?)";
+    return jdbcTemplate.update(sql, room.name(), room.roomTypeId());
   }
 
   @Override
   public Optional<Room> selectRoomById(int id) {
-    final var sql = "SELECT id, room_type_id FROM hotel_room WHERE id = ?";
+    final var sql = "SELECT id, name, room_type_id FROM hotel_room WHERE id = ?";
     final var rooms = jdbcTemplate.query(sql, new RoomRowMapper(), id);
     return rooms.stream().findFirst();
   }
 
   @Override
   public List<Room> selectRooms() {
-    final var sql = "SELECT id, room_type_id FROM hotel_room";
+    final var sql = "SELECT id, name, room_type_id FROM hotel_room";
     return jdbcTemplate.query(sql, new RoomRowMapper());
   }
 
   @Override
   public int updateRoom(int id, Room room) {
-    final var sql = "UPDATE hotel_room SET room_type_id = ? WHERE id = ?";
-    return jdbcTemplate.update(sql, room.roomTypeId(), id);
+    final var sql = "UPDATE hotel_room SET name = ?,room_type_id = ? WHERE id = ?";
+    return jdbcTemplate.update(sql, room.name(), room.roomTypeId(), id);
   }
 
   @Override
