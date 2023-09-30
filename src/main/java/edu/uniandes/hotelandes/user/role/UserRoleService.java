@@ -41,7 +41,7 @@ public class UserRoleService {
     if (roles.isPresent()) {
       final var r = roleDAO.updateRole(id, role);
       if (r != 1) {
-        throw new IllegalStateException("User role creation went wrong");
+        throw new IllegalStateException("User role update went wrong");
       }
       return role;
     } else {

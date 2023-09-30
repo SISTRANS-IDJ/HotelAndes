@@ -6,7 +6,7 @@ import java.util.Optional;
 public interface RoomBookingDAO {
   int insertRoomBooking(RoomBooking roomBooking);
 
-  Optional<RoomBooking> selectRoomBookingsById(String id);
+  Optional<RoomBooking> selectRoomBookingById(String id);
 
   List<RoomBooking> selectRoomBookings();
 
