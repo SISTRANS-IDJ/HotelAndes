@@ -1,9 +1,9 @@
-CREATE TABLE client
+CREATE TABLE hotelandes_client
 (
     id NUMBER(19) GENERATED ALWAYS AS IDENTITY PRIMARY KEY
 );
 
-CREATE TABLE user_role
+CREATE TABLE hotelandes_user_role
 (
     id          NUMBER(2) GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     role        VARCHAR(32 CHAR) NOT NULL,
@@ -38,11 +38,22 @@ CREATE TABLE hotel_room_booking
     capacity            NUMBER(1)  NOT NULL,
     consumption_plan_id NUMBER(3),
     FOREIGN KEY (hotel_room_id) REFERENCES hotel_room (id),
-    FOREIGN KEY (client_id) REFERENCES client (id)
+    FOREIGN KEY (client_id) REFERENCES hotelandes_client (id)
 );
 
-DROP TABLE client PURGE;
-DROP TABLE user_role PURGE;
-DROP TABLE hotel_room_type PURGE;
-DROP TABLE hotel_room PURGE;
-DROP TABLE hotel_room_booking PURGE;
+CREATE TABLE hotelandes_client_account
+(
+    id              NUMBER(19) PRIMARY KEY,
+    room_booking_id VARCHAR2(32 CHAR) NOT NULL,
+    state           VARCHAR2(8 CHAR)  NOT NULL CHECK ( state in ('OPEN', 'CLOSE') ),
+    FOREIGN KEY (room_booking_id) REFERENCES hotel_room_booking (id)
+);
+
+CREATE TABLE hotelandes_account_consumption
+(
+    id               NUMBER(19) GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    account_id       NUMBER(19)        NOT NULL,
+    consumption_date DATE              NOT NULL,
+    description      VARCHAR2(64 CHAR) NOT NULL,
+    cost             NUMBER(19, 4)     NOT NULL
+);
