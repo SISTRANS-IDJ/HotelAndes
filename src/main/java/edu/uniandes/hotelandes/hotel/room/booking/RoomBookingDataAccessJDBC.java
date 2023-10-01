@@ -39,7 +39,7 @@ public class RoomBookingDataAccessJDBC implements RoomBookingDAO {
     final var sql =
         """
             SELECT
-            id, client_id, room_booking_id,check_in, check_out, capacity, consumption_plan_id
+            id, client_id, hotel_room_id,check_in, check_out, capacity, consumption_plan_id
             FROM hotel_room_booking WHERE id = ?
             """;
     final var roomBookings = jdbcTemplate.query(sql, new RoomBookingRowMapper(), id);
@@ -51,7 +51,7 @@ public class RoomBookingDataAccessJDBC implements RoomBookingDAO {
     final var sql =
         """
             SELECT
-            id, client_id, room_booking_id,check_in, check_out, capacity, consumption_plan_id
+            id, client_id, hotel_room_id,check_in, check_out, capacity, consumption_plan_id
             FROM hotel_room_booking
             """;
     return jdbcTemplate.query(sql, new RoomBookingRowMapper());
@@ -64,7 +64,7 @@ public class RoomBookingDataAccessJDBC implements RoomBookingDAO {
             UPDATE
             hotel_room_booking
             SET
-            client_id = ?, room_booking_id = ?,check_in = ?, check_out = ?, capacity = ?, consumption_plan_id = ?
+            client_id = ?, hotel_room_id = ?,check_in = ?, check_out = ?, capacity = ?, consumption_plan_id = ?
             WHERE id = ?
             """;
     return jdbcTemplate.update(
