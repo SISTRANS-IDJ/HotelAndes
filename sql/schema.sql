@@ -57,3 +57,5 @@ CREATE TABLE hotelandes_account_consumption
     description      VARCHAR2(64 CHAR) NOT NULL,
     cost             NUMBER(19, 4)     NOT NULL
 );
+
+COMMIT;

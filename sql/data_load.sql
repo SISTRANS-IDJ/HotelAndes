@@ -1,3 +1,4 @@
+-- TODO: data load
 INSERT INTO user_role(role, description)
 VALUES ("CLIENT", "Hotel client");
 

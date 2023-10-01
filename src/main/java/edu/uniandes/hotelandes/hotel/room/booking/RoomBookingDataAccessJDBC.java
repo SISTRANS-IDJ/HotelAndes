@@ -20,7 +20,7 @@ public class RoomBookingDataAccessJDBC implements RoomBookingDAO {
     final var sql =
         """
             INSERT INTO
-            hotel_room_booking(id, client_id, room_booking_id,check_in, check_out, capacity, consumption_plan_id)
+            hotel_room_booking(id, client_id, hotel_room_id,check_in, check_out, capacity, consumption_plan_id)
             VALUES(?, ?, ?, ?, ?, ?, ?)
             """;
     return jdbcTemplate.update(
