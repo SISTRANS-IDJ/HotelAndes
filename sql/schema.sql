@@ -43,8 +43,9 @@ CREATE TABLE hotel_room_booking
 
 CREATE TABLE user
 (
-    id           NUMBER(19) GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    username     VARCHAR2(32 CHAR) NOT NULL UNIQUE,
+    id          NUMBER(19) GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    id_type       VARCHAR2(2 CHAR)  NOT NULL,
+    id_number     VARCHAR2(16 CHAR) NOT NULL,
     password     VARCHAR2(64 CHAR) NOT NULL,
     name         VARCHAR2(32 CHAR) NOT NULL,
     email        VARCHAR2(64 CHAR) NOT NULL UNIQUE,
