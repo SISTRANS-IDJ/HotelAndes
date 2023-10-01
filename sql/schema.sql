@@ -41,8 +41,20 @@ CREATE TABLE hotel_room_booking
     FOREIGN KEY (client_id) REFERENCES client (id)
 );
 
+CREATE TABLE user
+(
+    id           NUMBER(19) GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    username     VARCHAR2(32 CHAR) NOT NULL UNIQUE,
+    password     VARCHAR2(64 CHAR) NOT NULL,
+    name         VARCHAR2(32 CHAR) NOT NULL,
+    email        VARCHAR2(64 CHAR) NOT NULL UNIQUE,
+    role_id      NUMBER(2)         NOT NULL,
+    FOREIGN KEY (role_id) REFERENCES user_role (id)
+);
+
 DROP TABLE client PURGE;
 DROP TABLE user_role PURGE;
 DROP TABLE hotel_room_type PURGE;
 DROP TABLE hotel_room PURGE;
 DROP TABLE hotel_room_booking PURGE;
+DROP TABLE user PURGE;
