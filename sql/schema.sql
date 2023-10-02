@@ -12,11 +12,11 @@ CREATE TABLE hotelandes_user_role
 
 CREATE TABLE hotel_room_type
 (
-    id              NUMBER(2) PRIMARY KEY,
-    name            VARCHAR2(16 CHAR) NOT NULL,
-    description     VARCHAR2(32 CHAR),
-    price_per_night NUMBER(10, 2)     NOT NULL,
-    capacity        NUMBER(2)         NOT NULL
+    id                         NUMBER(2) PRIMARY KEY,
+    name                       VARCHAR2(60 CHAR) NOT NULL,
+    description                VARCHAR2(500 CHAR),
+    price_per_night             NUMBER(10, 2)     NOT NULL,
+    capacity NUMBER(2)         NOT NULL
 );
 
 CREATE TABLE hotel_room
@@ -81,3 +81,34 @@ CREATE TABLE hotelandes_account_consumption
     cost             NUMBER(19, 4)     NOT NULL,
     FOREIGN KEY (service_id) REFERENCES hotelandes_service (id)
 );
+
+CREATE TABLE hotel_user
+(
+    id          NUMBER(19) GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    id_type       VARCHAR2(2 CHAR)  NOT NULL,
+    id_number     VARCHAR2(16 CHAR) NOT NULL,
+    password     VARCHAR2(64 CHAR) NOT NULL,
+    name         VARCHAR2(32 CHAR) NOT NULL,
+    email        VARCHAR2(64 CHAR) NOT NULL UNIQUE,
+    role_id      NUMBER(2)         NOT NULL,
+    FOREIGN KEY (role_id) REFERENCES user_role (id)
+);
+
+CREATE TABLE consumption_plan 
+(
+    id NUMBER(19) GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    plan_name VARCHAR2(100 CHAR) NOT NULL,
+    stay_discount NUMBER ,
+    fixed_cost NUMBER ,
+    plan_description VARCHAR2(500 CHAR)
+)
+
+
+COMMIT;
+
+DROP TABLE client PURGE;
+DROP TABLE user_role PURGE;
+DROP TABLE hotel_room_type PURGE;
+DROP TABLE hotel_room PURGE;
+DROP TABLE hotel_room_booking PURGE;
+DROP TABLE hotel_user PURGE;
