@@ -58,7 +58,7 @@ CREATE TABLE hotelandes_account_consumption
 );
 
 COMMIT;
-CREATE TABLE user
+CREATE TABLE hotelandes_user
 (
     id          NUMBER(19) GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     id_type       VARCHAR2(2 CHAR)  NOT NULL,
@@ -68,6 +68,26 @@ CREATE TABLE user
     email        VARCHAR2(64 CHAR) NOT NULL UNIQUE,
     role_id      NUMBER(2)         NOT NULL,
     FOREIGN KEY (role_id) REFERENCES user_role (id)
+);
+
+CREATE TABLE hotelandes_sede
+(
+    id          NUMBER(19) GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    name        VARCHAR2(32 CHAR) NOT NULL,
+    city        VARCHAR2(32 CHAR) NOT NULL,
+    address     VARCHAR2(32 CHAR) NOT NULL,
+    rating      NUMBER(19)
+)
+
+CREATE TABLE hotelandes_service
+(
+    id          NUMBER(19) GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    name        VARCHAR2(32 CHAR) NOT NULL,
+    description VARCHAR2(64 CHAR) NOT NULL,
+    opening_time DATE              NOT NULL,
+    closing_time DATE              NOT NULL,
+    hotel_id   NUMBER(19)        NOT NULL,
+    FOREIGN KEY (hotel_id) REFERENCES hotelandes_sede (id)
 );
 
 DROP TABLE client PURGE;
