@@ -4,7 +4,7 @@ public record User(
     Byte id,
     String name,
     String email,
-    String idType,
-    String idNumber,
+    String id_type,
+    String id_number,
     String password,
-    Byte roleId) {}
+    Byte role_id) {}

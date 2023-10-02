@@ -18,29 +18,28 @@ public class UserDataAccessJDBC implements UserDAO {
   @Override
   public int insertUser(User user) {
     final var sql =
-        "INSERT INTO user(name, email, id_type, id_number, password, role_id) VALUES(?, ?, ?, ?, ?,"
-            + " ?)";
+        "INSERT INTO hotelandes_user(name, email, id_type, id_number, password, role_id) VALUES(?, ?, ?, ?, ?, ?)";
     return jdbcTemplate.update(
         sql,
         user.name(),
         user.email(),
-        user.idType(),
-        user.idNumber(),
+        user.id_type(),
+        user.id_number(),
         user.password(),
-        user.roleId());
+        user.role_id());
   }
 
   @Override
   public Optional<User> selectUserById(short id) {
     final var sql =
-        "SELECT id, name, email, id_type, id_number, password, role_id FROM user WHERE id = ?";
+        "SELECT id, name, email, id_type, id_number, password, role_id FROM hotelandes_user WHERE id = ?";
     final var user = jdbcTemplate.query(sql, new UserRowMapper(), id);
     return user.stream().findFirst();
   }
 
   @Override
   public List<User> selectUsers() {
-    final var sql = "SELECT id, name, email, id_type, id_number, password, role_id FROM user";
+    final var sql = "SELECT id, name, email, id_type, id_number, password, role_id FROM hotelandes_user";
     return jdbcTemplate.query(sql, new UserRowMapper());
   }
 
@@ -53,10 +52,10 @@ public class UserDataAccessJDBC implements UserDAO {
         sql,
         user.name(),
         user.email(),
-        user.idType(),
-        user.idNumber(),
+        user.id_type(),
+        user.id_number(),
         user.password(),
-        user.roleId(),
+        user.role_id(),
         id);
   }
 

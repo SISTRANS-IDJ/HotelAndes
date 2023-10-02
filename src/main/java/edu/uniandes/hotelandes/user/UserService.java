@@ -15,15 +15,10 @@ public class UserService {
   }
 
   public void createUser(User user) {
-    final var users = userDAO.selectUserById(user.id());
-    if (users.isEmpty()) {
-      final var u = userDAO.insertUser(user);
-      if (u != 1) {
-        throw new IllegalStateException("User creation went wrong");
-      }
-    } else {
-      throw new IllegalStateException("User already exists");
-    }
+    final var users = userDAO.insertUser(user);
+    if (users!= 1) {
+      throw new IllegalStateException("User creation went wrong");
+    } 
   }
 
   public User getUser(Short id) {
