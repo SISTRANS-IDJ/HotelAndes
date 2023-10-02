@@ -90,6 +90,27 @@ CREATE TABLE hotelandes_service
     FOREIGN KEY (hotel_id) REFERENCES hotelandes_sede (id)
 );
 
+CREATE TABLE product
+(
+    id          NUMBER(19) GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    name        VARCHAR2(32 CHAR) NOT NULL,
+    description VARCHAR2(64 CHAR) NOT NULL,
+    price       NUMBER(19)        NOT NULL,
+    service_id  NUMBER(19)        NOT NULL,
+    FOREIGN KEY (service_id) REFERENCES hotelandes_service (id)
+);
+
+CREATE TABLE service_booking
+(
+    id          NUMBER(19) GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    service_id  NUMBER(19)        NOT NULL,
+    client_id   NUMBER(19)        NOT NULL,
+    booking_start DATE              NOT NULL,
+    booking_end DATE              NOT NULL,
+    FOREIGN KEY (service_id) REFERENCES hotelandes_service (id),
+    FOREIGN KEY (client_id) REFERENCES hotelandes_client (id)
+);
+
 DROP TABLE client PURGE;
 DROP TABLE user_role PURGE;
 DROP TABLE hotel_room_type PURGE;
