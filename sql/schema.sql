@@ -15,9 +15,8 @@ CREATE TABLE hotel_room_type
     id                         NUMBER(2) PRIMARY KEY,
     name                       VARCHAR2(16 CHAR) NOT NULL,
     description                VARCHAR2(32 CHAR),
-    cost_per_night             NUMBER(10, 2)     NOT NULL,
-    suggested_minimum_capacity NUMBER(2)         NOT NULL,
-    suggested_maximum_capacity NUMBER(2)         NOT NULL
+    price_per_night             NUMBER(10, 2)     NOT NULL,
+    capacity NUMBER(2)         NOT NULL
 );
 
 CREATE TABLE hotel_room
