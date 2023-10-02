@@ -7,35 +7,35 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("api/v1/user")
 public class UserController {
-    private final UserService userService;
+  private final UserService userService;
 
-    @Autowired
-    public UserController(UserService userService){
-        this.userService = userService;
-    }
+  @Autowired
+  public UserController(UserService userService) {
+    this.userService = userService;
+  }
 
-    @PostMapping
-    public void createUser(@RequestBody User user){
-        userService.createUser(user);
-    }
+  @PostMapping
+  public void createUser(@RequestBody User user) {
+    userService.createUser(user);
+  }
 
-    @GetMapping("{id}")
-    public User getUserId(@PathVariable("id") Short id){
-        return userService.getUser(id);
-    }
+  @GetMapping("{id}")
+  public User getUserId(@PathVariable("id") Short id) {
+    return userService.getUser(id);
+  }
 
-    @GetMapping
-    public List<User> listUsers(){
-        return userService.getUsers();
-    }
+  @GetMapping
+  public List<User> listUsers() {
+    return userService.getUsers();
+  }
 
-    @PutMapping("{id}")
-    public User updateUser(@PathVariable Short id, @RequestBody User user){
-        return userService.updateUser(id, user);
-    }
+  @PutMapping("{id}")
+  public User updateUser(@PathVariable Short id, @RequestBody User user) {
+    return userService.updateUser(id, user);
+  }
 
-    @DeleteMapping("{id}")
-    public void deleteUser(@PathVariable("id") Short id){
-        userService.deleteUser(id);
-    }
+  @DeleteMapping("{id}")
+  public void deleteUser(@PathVariable("id") Short id) {
+    userService.deleteUser(id);
+  }
 }

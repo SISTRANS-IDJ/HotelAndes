@@ -1,5 +1,3 @@
 package edu.uniandes.hotelandes.hotel.room.type;
 
-public class RoomTypeService {
-    
-}
+public class RoomTypeService {}

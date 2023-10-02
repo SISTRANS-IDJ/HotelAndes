@@ -6,58 +6,57 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserService{
-    private final UserDAO userDAO;
+public class UserService {
+  private final UserDAO userDAO;
 
-    @Autowired
-    public UserService(UserDAO userDAO){
-        this.userDAO = userDAO;
-    }
+  @Autowired
+  public UserService(UserDAO userDAO) {
+    this.userDAO = userDAO;
+  }
 
-    public void createUser(User user){
-        final var users = userDAO.selectUserById(user.id());
-        if(users.isEmpty()){
-            final var u = userDAO.insertUser(user);
-            if(u != 1){
-                throw new IllegalStateException("User creation went wrong");
-            }
-        }
-        else{
-            throw new IllegalStateException("User already exists");
-        }
+  public void createUser(User user) {
+    final var users = userDAO.selectUserById(user.id());
+    if (users.isEmpty()) {
+      final var u = userDAO.insertUser(user);
+      if (u != 1) {
+        throw new IllegalStateException("User creation went wrong");
+      }
+    } else {
+      throw new IllegalStateException("User already exists");
     }
+  }
 
-    public User getUser(Short id){
-        return userDAO.selectUserById(id).orElseThrow(() -> new NotFoundException(String.format("User with id %s not found", id)));
-    }
+  public User getUser(Short id) {
+    return userDAO
+        .selectUserById(id)
+        .orElseThrow(() -> new NotFoundException(String.format("User with id %s not found", id)));
+  }
 
-    public List<User> getUsers(){
-        return userDAO.selectUsers();
-    }
+  public List<User> getUsers() {
+    return userDAO.selectUsers();
+  }
 
-    public User updateUser(Short id, User user){
-        final var users = userDAO.selectUserById(user.id());
-        if(users.isPresent()){
-            final var u = userDAO.updateUser(id, user);
-            if(u != 1){
-                throw new IllegalStateException("User update went wrong");
-            }
-            return user;
-        }
-        else{
-            throw new IllegalStateException("User doesn't exists");
-        }
+  public User updateUser(Short id, User user) {
+    final var users = userDAO.selectUserById(user.id());
+    if (users.isPresent()) {
+      final var u = userDAO.updateUser(id, user);
+      if (u != 1) {
+        throw new IllegalStateException("User update went wrong");
+      }
+      return user;
+    } else {
+      throw new IllegalStateException("User doesn't exists");
     }
+  }
 
-    public void deleteUser(Short id){
-        final var users = userDAO.selectUserById(id);
-        users.ifPresent(
-            user -> {
-                final var result = userDAO.deleteUser(id);
-                if(result != 1){
-                    throw new IllegalStateException("Could not delete user");
-                }
-            });
-    }
+  public void deleteUser(Short id) {
+    final var users = userDAO.selectUserById(id);
+    users.ifPresent(
+        user -> {
+          final var result = userDAO.deleteUser(id);
+          if (result != 1) {
+            throw new IllegalStateException("Could not delete user");
+          }
+        });
+  }
 }
-

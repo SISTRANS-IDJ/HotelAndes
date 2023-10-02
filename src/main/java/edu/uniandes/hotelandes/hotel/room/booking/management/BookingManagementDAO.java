@@ -1,19 +1,15 @@
 package edu.uniandes.hotelandes.hotel.room.booking.management;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Optional;
 
-import edu.uniandes.hotelandes.hotel.room.booking.RoomBooking;
+public interface BookingManagementDAO {
 
-public interface BookingManagementDAO{
+  Optional<Date> selectCheckIn(String roomBookingId);
 
-    Optional<Date> selectCheckIn(String roomBookingId);
+  int updateCheckIn(String roomBookingId, Date checkIn);
 
-    int updateCheckIn(String roomBookingId, Date checkIn);
+  Optional<Date> selectCheckOut(String roomBookingId);
 
-    Optional<Date> selectCheckOut(String roomBookingId);
-
-    int updateCheckOut(String roomBookingId, Date checkOut);
-
+  int updateCheckOut(String roomBookingId, Date checkOut);
 }

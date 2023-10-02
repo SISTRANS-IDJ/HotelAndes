@@ -4,14 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 public interface RoomTypeDao {
-    int insertRoomType(RoomType roomType);
-    
-    Optional<RoomType> selectRoomTypeById(int id);
+  int insertRoomType(RoomType roomType);
 
-    List<RoomType> selectRoomTypes();
+  Optional<RoomType> selectRoomTypeById(int id);
 
-    int updateRoomType(int id, RoomType roomType);
+  List<RoomType> selectRoomTypes();
 
-    int deleteRoomType(int id);
-    
+  int updateRoomType(int id, RoomType roomType);
+
+  int deleteRoomType(int id);
 }

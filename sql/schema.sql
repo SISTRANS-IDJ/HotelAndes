@@ -12,11 +12,11 @@ CREATE TABLE hotelandes_user_role
 
 CREATE TABLE hotel_room_type
 (
-    id                         NUMBER(2) PRIMARY KEY,
-    name                       VARCHAR2(16 CHAR) NOT NULL,
-    description                VARCHAR2(32 CHAR),
-    price_per_night             NUMBER(10, 2)     NOT NULL,
-    capacity NUMBER(2)         NOT NULL
+    id              NUMBER(2) PRIMARY KEY,
+    name            VARCHAR2(16 CHAR) NOT NULL,
+    description     VARCHAR2(32 CHAR),
+    price_per_night NUMBER(10, 2)     NOT NULL,
+    capacity        NUMBER(2)         NOT NULL
 );
 
 CREATE TABLE hotel_room
@@ -48,51 +48,36 @@ CREATE TABLE hotelandes_client_account
     FOREIGN KEY (room_booking_id) REFERENCES hotel_room_booking (id)
 );
 
+CREATE TABLE hotelandes_user
+(
+    id        NUMBER(19) GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    id_type   VARCHAR2(2 CHAR)  NOT NULL,
+    id_number VARCHAR2(16 CHAR) NOT NULL,
+    password  VARCHAR2(64 CHAR) NOT NULL,
+    name      VARCHAR2(32 CHAR) NOT NULL,
+    email     VARCHAR2(64 CHAR) NOT NULL UNIQUE,
+    role_id   NUMBER(2)         NOT NULL,
+    FOREIGN KEY (role_id) REFERENCES hotelandes_user_role (id)
+);
+
+CREATE TABLE hotelandes_service
+(
+    id           NUMBER(19) GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    name         VARCHAR2(32 CHAR) NOT NULL,
+    description  VARCHAR2(64 CHAR) NOT NULL,
+    opening_time DATE              NOT NULL,
+    closing_time DATE              NOT NULL,
+    hotel_id     NUMBER(19)        NOT NULL
+);
+
+
 CREATE TABLE hotelandes_account_consumption
 (
     id               NUMBER(19) GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     account_id       NUMBER(19)        NOT NULL,
+    service_id       NUMBER(19)        NOT NULL,
     consumption_date DATE              NOT NULL,
     description      VARCHAR2(64 CHAR) NOT NULL,
-    cost             NUMBER(19, 4)     NOT NULL
+    cost             NUMBER(19, 4)     NOT NULL,
+    FOREIGN KEY (service_id) REFERENCES hotelandes_service (id)
 );
-
-COMMIT;
-CREATE TABLE hotelandes_user
-(
-    id          NUMBER(19) GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    id_type       VARCHAR2(2 CHAR)  NOT NULL,
-    id_number     VARCHAR2(16 CHAR) NOT NULL,
-    password     VARCHAR2(64 CHAR) NOT NULL,
-    name         VARCHAR2(32 CHAR) NOT NULL,
-    email        VARCHAR2(64 CHAR) NOT NULL UNIQUE,
-    role_id      NUMBER(2)         NOT NULL,
-    FOREIGN KEY (role_id) REFERENCES user_role (id)
-);
-
-CREATE TABLE hotelandes_sede
-(
-    id          NUMBER(19) GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    name        VARCHAR2(32 CHAR) NOT NULL,
-    city        VARCHAR2(32 CHAR) NOT NULL,
-    address     VARCHAR2(32 CHAR) NOT NULL,
-    rating      NUMBER(19)
-)
-
-CREATE TABLE hotelandes_service
-(
-    id          NUMBER(19) GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    name        VARCHAR2(32 CHAR) NOT NULL,
-    description VARCHAR2(64 CHAR) NOT NULL,
-    opening_time DATE              NOT NULL,
-    closing_time DATE              NOT NULL,
-    hotel_id   NUMBER(19)        NOT NULL,
-    FOREIGN KEY (hotel_id) REFERENCES hotelandes_sede (id)
-);
-
-DROP TABLE client PURGE;
-DROP TABLE user_role PURGE;
-DROP TABLE hotel_room_type PURGE;
-DROP TABLE hotel_room PURGE;
-DROP TABLE hotel_room_booking PURGE;
-DROP TABLE user PURGE;
