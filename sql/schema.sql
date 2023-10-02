@@ -103,9 +103,6 @@ CREATE TABLE consumption_plan
     plan_description VARCHAR2(500 CHAR)
 )
 
-
-COMMIT;
-
 CREATE TABLE product
 (
     id          NUMBER(19) GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -127,9 +124,17 @@ CREATE TABLE service_booking
     FOREIGN KEY (client_id) REFERENCES hotelandes_client (id)
 );
 
+COMMIT;
+
 DROP TABLE client PURGE;
 DROP TABLE user_role PURGE;
 DROP TABLE hotel_room_type PURGE;
 DROP TABLE hotel_room PURGE;
 DROP TABLE hotel_room_booking PURGE;
 DROP TABLE hotel_user PURGE;
+DROP TABLE service_booking PURGE;
+DROP TABLE product PURGE;
+DROP TABLE consumption_plan PURGE;
+DROP TABLE hotelandes_service PURGE;
+DROP TABLE hotelandes_client_account PURGE;
+
