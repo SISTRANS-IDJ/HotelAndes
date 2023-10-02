@@ -14,7 +14,7 @@ public class RoomTypeRowMapper implements RowMapper<RoomType>{
             rs.getInt("id"),
             rs.getString("name"),
             rs.getString("description"),
-            rs.getDouble("pricePerNight"),
+            rs.getDouble("price_per_night"),
             rs.getShort("capacity")
         );
     }

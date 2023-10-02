@@ -13,8 +13,8 @@ CREATE TABLE hotelandes_user_role
 CREATE TABLE hotel_room_type
 (
     id                         NUMBER(2) PRIMARY KEY,
-    name                       VARCHAR2(16 CHAR) NOT NULL,
-    description                VARCHAR2(32 CHAR),
+    name                       VARCHAR2(60 CHAR) NOT NULL,
+    description                VARCHAR2(500 CHAR),
     price_per_night             NUMBER(10, 2)     NOT NULL,
     capacity NUMBER(2)         NOT NULL
 );
@@ -57,8 +57,7 @@ CREATE TABLE hotelandes_account_consumption
     cost             NUMBER(19, 4)     NOT NULL
 );
 
-COMMIT;
-CREATE TABLE user
+CREATE TABLE hotel_user
 (
     id          NUMBER(19) GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     id_type       VARCHAR2(2 CHAR)  NOT NULL,
@@ -70,9 +69,21 @@ CREATE TABLE user
     FOREIGN KEY (role_id) REFERENCES user_role (id)
 );
 
+CREATE TABLE consumption_plan 
+(
+    id NUMBER(19) GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    plan_name VARCHAR2(100 CHAR) NOT NULL,
+    stay_discount NUMBER ,
+    fixed_cost NUMBER ,
+    plan_description VARCHAR2(500 CHAR)
+)
+
+
+COMMIT;
+
 DROP TABLE client PURGE;
 DROP TABLE user_role PURGE;
 DROP TABLE hotel_room_type PURGE;
 DROP TABLE hotel_room PURGE;
 DROP TABLE hotel_room_booking PURGE;
-DROP TABLE user PURGE;
+DROP TABLE hotel_user PURGE;
