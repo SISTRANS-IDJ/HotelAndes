@@ -113,15 +113,3 @@ CREATE TABLE service_booking
 );
 
 COMMIT;
-
-DROP TABLE client PURGE;
-DROP TABLE user_role PURGE;
-DROP TABLE hotel_room_type PURGE;
-DROP TABLE hotel_room PURGE;
-DROP TABLE hotel_room_booking PURGE;
-DROP TABLE service_booking PURGE;
-DROP TABLE product PURGE;
-DROP TABLE consumption_plan PURGE;
-DROP TABLE hotelandes_service PURGE;
-DROP TABLE hotelandes_client_account PURGE;
-
