@@ -19,7 +19,7 @@ public class RoomTypeRepository implements RoomTypeDao{
     @Override
     public int insertRoomType(RoomType roomType) {
         final var sql = "INSERT INTO hotel_room_type(name, description, capacity, price) VALUES(?, ?, ?, ?)";
-        return jdbcTemplate.update(sql, roomType.name(), roomType.description(), roomType.capacity(), roomType.pricePerNight());
+        return jdbcTemplate.update(sql, roomType.name(), roomType.description(), roomType.capacity(), roomType.price_per_night());
     }
 
     @Override
@@ -31,20 +31,20 @@ public class RoomTypeRepository implements RoomTypeDao{
 
     @Override
     public List<RoomType> selectRoomTypes() {
-        final var sql = "SELECT id, name, description, capacity, pricePerNight FROM RoomType";
+        final var sql = "SELECT id, name, description, capacity, pricePerNight FROM hotel_room_type";
         return jdbcTemplate.query(sql, new RoomTypeRowMapper());
     }
 
     @Override
     public int updateRoomType(int id, RoomType roomType) {
-        final var sql = "UPDATE RoomType SET name = ?, description = ?, capacity = ?, pricePerNight = ? WHERE id = ?";
-        return jdbcTemplate.update(sql, roomType.name(), roomType.description(), roomType.capacity(), roomType.pricePerNight(), id);
+        final var sql = "UPDATE hotel_room_type SET name = ?, description = ?, capacity = ?, pricePerNight = ? WHERE id = ?";
+        return jdbcTemplate.update(sql, roomType.name(), roomType.description(), roomType.capacity(), roomType.price_per_night(), id);
     }
 
     @Override
     public int deleteRoomType(int id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteRoomType'");
+        final var sql = "DELETE FROM hotel_room_type WHERE id = ?";
+        return jdbcTemplate.update(sql, id);
     }
 
     
