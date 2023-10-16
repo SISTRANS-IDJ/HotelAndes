@@ -1,6 +1,6 @@
 # HotelAndes
 
-Clone repo & run 
+Clone repo & run
 
 > ./gradlew bootRun
 

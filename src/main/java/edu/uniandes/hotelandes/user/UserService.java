@@ -16,9 +16,9 @@ public class UserService {
 
   public void createUser(User user) {
     final var users = userDAO.insertUser(user);
-    if (users!= 1) {
+    if (users != 1) {
       throw new IllegalStateException("User creation went wrong");
-    } 
+    }
   }
 
   public User getUser(Short id) {
