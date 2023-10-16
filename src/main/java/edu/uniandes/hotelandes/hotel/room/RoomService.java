@@ -1,6 +1,6 @@
 package edu.uniandes.hotelandes.hotel.room;
 
-import edu.uniandes.hotelandes.exception.NotFoundException;
+import edu.uniandes.hotelandes.exception.EntityNotFoundException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,7 +25,8 @@ public class RoomService {
   public Room getRoom(Integer id) {
     return roomDAO
         .selectRoomById(id)
-        .orElseThrow(() -> new NotFoundException(String.format("Room with id %s not found", id)));
+        .orElseThrow(
+            () -> new EntityNotFoundException(String.format("Room with id %s not found", id)));
   }
 
   public List<Room> getRooms() {
@@ -55,7 +56,7 @@ public class RoomService {
           }
         },
         () -> {
-          throw new NotFoundException(String.format("Room with id %s not found", id));
+          throw new EntityNotFoundException(String.format("Room with id %s not found", id));
         });
   }
 }

@@ -1,6 +1,6 @@
 package edu.uniandes.hotelandes.hotel.room.hotelService.serviceBooking;
 
-import edu.uniandes.hotelandes.exception.NotFoundException;
+import edu.uniandes.hotelandes.exception.EntityNotFoundException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,7 +25,9 @@ public class ServiceBookingService {
     return serviceBookingDAO
         .selectServiceBookingById(id)
         .orElseThrow(
-            () -> new NotFoundException(String.format("ServiceBooking with id %s not found", id)));
+            () ->
+                new EntityNotFoundException(
+                    String.format("ServiceBooking with id %s not found", id)));
   }
 
   public List<ServiceBooking> getServiceBookings() {
@@ -55,7 +57,8 @@ public class ServiceBookingService {
           }
         },
         () -> {
-          throw new NotFoundException(String.format("ServiceBooking with id %s not found", id));
+          throw new EntityNotFoundException(
+              String.format("ServiceBooking with id %s not found", id));
         });
   }
 }

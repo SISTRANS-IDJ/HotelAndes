@@ -1,6 +1,8 @@
 package edu.uniandes.hotelandes.user.role;
 
-import edu.uniandes.hotelandes.exception.NotFoundException;
+import edu.uniandes.hotelandes.exception.EntityAlreadyExists;
+import edu.uniandes.hotelandes.exception.EntityDoesNotExists;
+import edu.uniandes.hotelandes.exception.EntityNotFoundException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,51 +17,39 @@ public class UserRoleService {
   }
 
   public void createUserRole(Role role) {
-    final var roles = roleDAO.selectRoleById(role.id());
-    if (roles.isEmpty()) {
-      final var r = roleDAO.insertRole(role);
-      if (r != 1) {
-        throw new IllegalStateException("User role creation went wrong");
-      }
-    } else {
-      throw new IllegalStateException("User role already exists");
+    if (roleDAO.selectRoleById(role.id()).isPresent()) {
+      throw new EntityAlreadyExists("User role already exists");
     }
+
+    roleDAO.insertRole(role);
   }
 
-  public Role getRole(Short id) {
+  public Role getRole(Byte id) {
     return roleDAO
         .selectRoleById(id)
-        .orElseThrow(() -> new NotFoundException(String.format("Role with id %s not found", id)));
+        .orElseThrow(
+            () -> new EntityNotFoundException(String.format("Role with id %d not found", id)));
   }
 
   public List<Role> getRoles() {
     return roleDAO.selectRoles();
   }
 
-  public Role updateRole(Short id, Role role) {
-    final var roles = roleDAO.selectRoleById(role.id());
-    if (roles.isPresent()) {
-      final var r = roleDAO.updateRole(id, role);
-      if (r != 1) {
-        throw new IllegalStateException("User role update went wrong");
-      }
-      return role;
-    } else {
-      throw new IllegalStateException("User role doesn't exists");
+  public Role updateRole(Byte id, Role role) {
+    if (roleDAO.selectRoleById(role.id()).isEmpty()) {
+      throw new EntityDoesNotExists("User role doesn't exists");
     }
+
+    roleDAO.updateRole(id, role);
+
+    return role;
   }
 
-  public void deleteRole(Short id) {
-    final var roles = roleDAO.selectRoleById(id);
-    roles.ifPresentOrElse(
-        role -> {
-          final var result = roleDAO.deleteRole(id);
-          if (result != 1) {
-            throw new IllegalStateException("Could not delete role");
-          }
-        },
-        () -> {
-          throw new NotFoundException(String.format("Role with id %s not found", id));
-        });
+  public void deleteRole(Byte id) {
+    if (roleDAO.selectRoleById(id).isEmpty()) {
+      throw new EntityDoesNotExists("User role doesn't exists");
+    }
+
+    roleDAO.deleteRole(id);
   }
 }

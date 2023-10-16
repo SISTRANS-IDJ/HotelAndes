@@ -74,7 +74,7 @@ public class RoleDataAcessJDBC implements RoleDAO {
   }
 
   @Override
-  public int deleteRole(int id) {
+  public int deleteRole(byte id) {
     final var sql =
         """
         DELETE FROM

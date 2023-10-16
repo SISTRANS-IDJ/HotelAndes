@@ -1,6 +1,6 @@
 package edu.uniandes.hotelandes.account.consumption;
 
-import edu.uniandes.hotelandes.exception.NotFoundException;
+import edu.uniandes.hotelandes.exception.EntityNotFoundException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,7 +33,7 @@ public class AccountConsumptionService {
         .selectAccountConsumptionById(id)
         .orElseThrow(
             () ->
-                new NotFoundException(
+                new EntityNotFoundException(
                     String.format("Account consumption with id %s not found", id)));
   }
 
@@ -66,7 +66,7 @@ public class AccountConsumptionService {
           }
         },
         () -> {
-          throw new NotFoundException(
+          throw new EntityNotFoundException(
               String.format("Account consumption with id %s not found", id));
         });
   }
