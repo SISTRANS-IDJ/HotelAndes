@@ -4,13 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ServiceBookingDAO {
-    int insertServiceBooking (ServiceBooking serviceBooking);
+  int insertServiceBooking(ServiceBooking serviceBooking);
 
-    Optional<ServiceBooking> selectServiceBookingById (int id);
+  Optional<ServiceBooking> selectServiceBookingById(int id);
 
-    List<ServiceBooking> selectServiceBookings ();
+  List<ServiceBooking> selectServiceBookings();
 
-    int updateServiceBooking (int id, ServiceBooking serviceBooking);
+  int updateServiceBooking(int id, ServiceBooking serviceBooking);
 
-    int deleteServiceBooking (int id);
+  int deleteServiceBooking(int id);
 }

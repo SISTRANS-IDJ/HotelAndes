@@ -15,11 +15,19 @@ public class RoomTypeRepository implements RoomTypeDao {
     this.jdbcTemplate = jdbcTemplate;
   }
 
-    @Override
-    public int insertRoomType(RoomType roomType) {
-        final var sql = "INSERT INTO hotel_room_type(id,name, description, capacity, price_per_night) VALUES(?, ?, ?, ?,?)";
-        return jdbcTemplate.update(sql, roomType.id(), roomType.name(), roomType.description(), roomType.capacity(), roomType.price_per_night());
-    }
+  @Override
+  public int insertRoomType(RoomType roomType) {
+    final var sql =
+        "INSERT INTO hotel_room_type(id,name, description, capacity, price_per_night) VALUES(?, ?,"
+            + " ?, ?,?)";
+    return jdbcTemplate.update(
+        sql,
+        roomType.id(),
+        roomType.name(),
+        roomType.description(),
+        roomType.capacity(),
+        roomType.price_per_night());
+  }
 
   @Override
   public Optional<RoomType> selectRoomTypeById(int id) {
@@ -29,22 +37,29 @@ public class RoomTypeRepository implements RoomTypeDao {
     return roomTypes.stream().findFirst();
   }
 
-    @Override
-    public List<RoomType> selectRoomTypes() {
-        final var sql = "SELECT id, name, description, capacity, price_per_night FROM hotel_room_type";
-        return jdbcTemplate.query(sql, new RoomTypeRowMapper());
-    }
+  @Override
+  public List<RoomType> selectRoomTypes() {
+    final var sql = "SELECT id, name, description, capacity, price_per_night FROM hotel_room_type";
+    return jdbcTemplate.query(sql, new RoomTypeRowMapper());
+  }
 
-    @Override
-    public int updateRoomType(int id, RoomType roomType) {
-        final var sql = "UPDATE hotel_room_type SET name = ?, description = ?, capacity = ?, pricePerNight = ? WHERE id = ?";
-        return jdbcTemplate.update(sql, roomType.name(), roomType.description(), roomType.capacity(), roomType.price_per_night(), id);
-    }
+  @Override
+  public int updateRoomType(int id, RoomType roomType) {
+    final var sql =
+        "UPDATE hotel_room_type SET name = ?, description = ?, capacity = ?, pricePerNight = ?"
+            + " WHERE id = ?";
+    return jdbcTemplate.update(
+        sql,
+        roomType.name(),
+        roomType.description(),
+        roomType.capacity(),
+        roomType.price_per_night(),
+        id);
+  }
 
-    @Override
-    public int deleteRoomType(int id) {
-        final var sql = "DELETE FROM hotel_room_type WHERE id = ?";
-        return jdbcTemplate.update(sql, id);
-    }
-
+  @Override
+  public int deleteRoomType(int id) {
+    final var sql = "DELETE FROM hotel_room_type WHERE id = ?";
+    return jdbcTemplate.update(sql, id);
+  }
 }

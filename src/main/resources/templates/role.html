@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HotelAndes</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+</head>
+<body class="d-flex flex-column vh-100">
+<header>
+    <nav class="navbar navbar-expand-lg bg-dark sticky-top shadow" data-bs-theme="dark"
+         id="mainNavbar">
+        <div class="container-fluid">
+            <a class="navbar-brand">HotelAndes</a>
+        </div>
+    </nav>
+</header>
+<main class="fluid-container h-100">
+    <div class="row h-100">
+        <section class="col-2 border-end border-3 border-dark" id="sidebarMenu">
+            <div class="d-flex flex-column">
+                <a class="text-center text-decoration-none text-reset" data-bs-toggle="collapse"
+                   href="#collapseUser" role="button"
+                   aria-expanded="false" aria-controls="collapseUser">
+                    <span class="fs-5 fw-semibold">Usuario</span>
+                </a>
+                <div class="collapse" id="collapseUser">
+                    <div class="d-flex flex-column">
+                        <a class="text-center text-decoration-none text-reset">
+                            <span class="fs-6 fw-semibold">Rol</span>
+                        </a>
+                        <a class="text-center text-decoration-none text-reset">
+                            <span class="fs-6 fw-semibold">SUBMENU</span>
+                        </a>
+                    </div>
+                </div>
+                <a class="text-center text-decoration-none text-reset">
+                    <span class="fs-5 fw-semibold text-decoration-none text-reset">Reserva</span>
+                </a>
+                <a class="text-center text-decoration-none text-reset">
+                    <span class="fs-5 fw-semibold text-decoration-none text-reset">Pago</span>
+                </a>
+            </div>
+        </section>
+        <section class="col" id="pageContent">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="py-4">
+                        <h1 class="text-center display-1">Manejo de roles</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="px-5">
+                        <table class="table table-secondary table-hover table-bordered">
+                            <thead>
+                            <th scope="col">id</th>
+                            <th scope="col">rol</th>
+                            <th scope="col">descripción</th>
+                            <th scope="col">acciones</th>
+                            </thead>
+                            <tbody class="table-group-divider">
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>admin</td>
+                                <td>HotelAndes admin</td>
+                                <td>
+                                    <div class="d-flex gap-2">
+                                        <a href="#">
+                                            Modificar
+                                        </a>
+                                        <a href="#">
+                                            Borrar
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+</body>
+</html>

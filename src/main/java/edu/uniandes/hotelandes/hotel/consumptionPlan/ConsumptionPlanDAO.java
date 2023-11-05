@@ -4,13 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ConsumptionPlanDAO {
-    int insertConsumptionPlan(ConsumptionPlan consumptionPlan);
+  int insertConsumptionPlan(ConsumptionPlan consumptionPlan);
 
-    Optional<ConsumptionPlan> selectConsumptionPlanById(int id);
-    
-    List<ConsumptionPlan> selectConsumptionPlans();
+  Optional<ConsumptionPlan> selectConsumptionPlanById(int id);
 
-    int updateConsumptionPlan(int id, ConsumptionPlan consumptionPlan);
+  List<ConsumptionPlan> selectConsumptionPlans();
 
-    int deleteConsumptionPlan(int id);
+  int updateConsumptionPlan(int id, ConsumptionPlan consumptionPlan);
+
+  int deleteConsumptionPlan(int id);
 }

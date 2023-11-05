@@ -1,6 +1,6 @@
 package edu.uniandes.hotelandes.user;
 
-import edu.uniandes.hotelandes.exception.NotFoundException;
+import edu.uniandes.hotelandes.exception.EntityNotFoundException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,15 +16,16 @@ public class UserService {
 
   public void createUser(User user) {
     final var users = userDAO.insertUser(user);
-    if (users!= 1) {
+    if (users != 1) {
       throw new IllegalStateException("User creation went wrong");
-    } 
+    }
   }
 
   public User getUser(Short id) {
     return userDAO
         .selectUserById(id)
-        .orElseThrow(() -> new NotFoundException(String.format("User with id %s not found", id)));
+        .orElseThrow(
+            () -> new EntityNotFoundException(String.format("User with id %s not found", id)));
   }
 
   public List<User> getUsers() {

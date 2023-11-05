@@ -1,6 +1,6 @@
 package edu.uniandes.hotelandes.hotel.room.booking.management;
 
-import edu.uniandes.hotelandes.exception.NotFoundException;
+import edu.uniandes.hotelandes.exception.EntityNotFoundException;
 import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +19,7 @@ public class BookingManagementService {
         .selectCheckIn(roomBookingId)
         .orElseThrow(
             () ->
-                new NotFoundException(
+                new EntityNotFoundException(
                     String.format("CheckIn with id %s not found", roomBookingId)));
   }
 
@@ -28,7 +28,7 @@ public class BookingManagementService {
         .selectCheckOut(roomBookingId)
         .orElseThrow(
             () ->
-                new NotFoundException(
+                new EntityNotFoundException(
                     String.format("CheckOut with id %s not found", roomBookingId)));
   }
 

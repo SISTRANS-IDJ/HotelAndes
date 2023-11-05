@@ -4,14 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ProductDAO {
-    int insertProduct(Product product);
+  int insertProduct(Product product);
 
-    Optional<Product> selectProductById(int id);
+  Optional<Product> selectProductById(int id);
 
-    List<Product> selectProducts();
+  List<Product> selectProducts();
 
-    int updateProduct(int id, Product product);
+  int updateProduct(int id, Product product);
 
-    int deleteProduct(int id);
-    
+  int deleteProduct(int id);
 }
