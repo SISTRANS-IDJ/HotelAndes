@@ -2,5 +2,5 @@ spring:
   datasource:
     driver-class-name: oracle.jdbc.OracleDriver
     url: jdbc:oracle:thin:@//fn4.oracle.virtual.uniandes.edu.co:1521/PROD
-    username: ISIS2304D32202320
-    password: ExjjXZrvzyBb
+    username: 
+    password: 
