@@ -1,13 +1,28 @@
-CREATE TABLE hotelandes_client
-(
-    id NUMBER(19) GENERATED ALWAYS AS IDENTITY PRIMARY KEY
-);
 
 CREATE TABLE hotelandes_user_role
 (
     id          NUMBER(2) GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     role        VARCHAR(32 CHAR) NOT NULL,
     description VARCHAR(32 CHAR)
+);
+
+CREATE TABLE hotelandes_user
+(
+    id        NUMBER(19) GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    id_type   VARCHAR2(2 CHAR)  NOT NULL,
+    id_number VARCHAR2(16 CHAR) NOT NULL,
+    password  VARCHAR2(64 CHAR) NOT NULL,
+    name      VARCHAR2(32 CHAR) NOT NULL,
+    email     VARCHAR2(64 CHAR) NOT NULL UNIQUE,
+    role_id   NUMBER(2)         NOT NULL,
+    FOREIGN KEY (role_id) REFERENCES hotelandes_user_role (id)
+);
+
+CREATE TABLE hotelandes_client
+(
+    id NUMBER(19) PRIMARY KEY,
+    phone   VARCHAR(10 CHAR) NOT NULL,
+    FOREIGN KEY (id) REFERENCES hotelandes_user(id) 
 );
 
 CREATE TABLE hotel_room_type
@@ -48,18 +63,6 @@ CREATE TABLE hotelandes_client_account
     FOREIGN KEY (room_booking_id) REFERENCES hotel_room_booking (id)
 );
 
-CREATE TABLE hotelandes_user
-(
-    id        NUMBER(19) GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    id_type   VARCHAR2(2 CHAR)  NOT NULL,
-    id_number VARCHAR2(16 CHAR) NOT NULL,
-    password  VARCHAR2(64 CHAR) NOT NULL,
-    name      VARCHAR2(32 CHAR) NOT NULL,
-    email     VARCHAR2(64 CHAR) NOT NULL UNIQUE,
-    role_id   NUMBER(2)         NOT NULL,
-    FOREIGN KEY (role_id) REFERENCES hotelandes_user_role (id)
-);
-
 CREATE TABLE hotelandes_service
 (
     id           NUMBER(19) GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -89,7 +92,7 @@ CREATE TABLE consumption_plan
     stay_discount NUMBER ,
     fixed_cost NUMBER ,
     plan_description VARCHAR2(500 CHAR)
-)
+);
 
 CREATE TABLE product
 (
