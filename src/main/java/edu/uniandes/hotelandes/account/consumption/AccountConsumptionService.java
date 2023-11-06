@@ -1,6 +1,6 @@
 package edu.uniandes.hotelandes.account.consumption;
 
-import edu.uniandes.hotelandes.exception.EntityNotFoundException;
+import edu.uniandes.hotelandes.exception.*;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,7 @@ public class AccountConsumptionService {
     this.accountConsumptionDAO = accountConsumptionDAO;
   }
 
-  public static void createAccountConsumption(AccountConsumption accountConsumption) {
+  public void createAccountConsumption(AccountConsumption accountConsumption) {
 
     final var accountConsumptions =
         accountConsumptionDAO.selectAccountConsumptionById(accountConsumption.id());
