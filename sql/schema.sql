@@ -29,7 +29,7 @@ CREATE TABLE hotel_room_type
 (
     id                         NUMBER(2) PRIMARY KEY,
     name                       VARCHAR2(60 CHAR) NOT NULL,
-    description                VARCHAR2(500 CHAR),
+    description                VARCHAR2(1000 CHAR),
     price_per_night             NUMBER(10, 2)     NOT NULL,
     capacity NUMBER(2)         NOT NULL
 );
