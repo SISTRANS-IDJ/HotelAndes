@@ -20,6 +20,7 @@ public class UserGenerator {
     @Autowired
     private  UserRoleService userRoleService;
 
+    private static Integer newid = 1;
 
     private  Byte getValidUserRoleID(){
         List<Role> roles = userRoleService.getRoles();
@@ -33,12 +34,12 @@ public class UserGenerator {
         String id_number = faker.number().digits(10);
         String password = faker.number().digits(20);
         String name = faker.name().firstName();
-        Pattern pattern = Pattern.compile("[a-z]+", Pattern.CASE_INSENSITIVE);
+        String lastName = faker.name().lastName();
         String companyName =faker.company().name().toLowerCase().replaceAll("[^a-z]", "");
-        // Matcher matcher = pattern.matcher(companyName);
-        String email = name.toLowerCase() + "@" + faker.domain().firstLevelDomain(companyName);
+        String email = name.toLowerCase()+"."+lastName.toLowerCase()+ newid.toString() + "@" + faker.domain().firstLevelDomain(companyName);
         Byte role_id = getValidUserRoleID();
-        User user = new User(null, name, email, id_type, id_number, password, role_id);
+        User user = new User(null, name + " "+ lastName, email, id_type, id_number, password, role_id);
+        newid ++;
         return user;
     }
 }
