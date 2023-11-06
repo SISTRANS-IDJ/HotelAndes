@@ -14,7 +14,7 @@ public class AccountConsumptionService {
     this.accountConsumptionDAO = accountConsumptionDAO;
   }
 
-  public void createAccountConsumption(AccountConsumption accountConsumption) {
+  public static void createAccountConsumption(AccountConsumption accountConsumption) {
 
     final var accountConsumptions =
         accountConsumptionDAO.selectAccountConsumptionById(accountConsumption.id());
