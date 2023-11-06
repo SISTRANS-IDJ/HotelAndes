@@ -20,7 +20,7 @@ public class UserRoleController {
   }
 
   @GetMapping("{id}")
-  public Role getRoleId(@PathVariable("id") Short id) {
+  public Role getRoleId(@PathVariable("id") Byte id) {
     return userRoleService.getRole(id);
   }
 
@@ -30,12 +30,12 @@ public class UserRoleController {
   }
 
   @PutMapping("{id}")
-  public Role updateRole(@PathVariable Short id, @RequestBody Role role) {
+  public Role updateRole(@PathVariable Byte id, @RequestBody Role role) {
     return userRoleService.updateRole(id, role);
   }
 
   @DeleteMapping("{id}")
-  public void deleteRole(@PathVariable("id") Short id) {
+  public void deleteRole(@PathVariable("id") Byte id) {
     userRoleService.deleteRole(id);
   }
 }

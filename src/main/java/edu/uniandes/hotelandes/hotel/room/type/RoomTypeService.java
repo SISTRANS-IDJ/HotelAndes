@@ -27,4 +27,8 @@ public class RoomTypeService {
   public List<RoomType> getRoomTypes() {
     return roomTypeDao.selectRoomTypes();
   }
+
+  public void deleteRoomType(Integer id){
+    roomTypeDao.deleteRoomType(id);
+  }
 }

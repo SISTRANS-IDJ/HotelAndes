@@ -9,17 +9,17 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserRoleService {
-  private final RoleDAO roleDAO;
+  private final RoleDataAcessJDBC roleDAO;
 
   @Autowired
   public UserRoleService(RoleDAO roleDAO) {
-    this.roleDAO = roleDAO;
+    this.roleDAO = (RoleDataAcessJDBC)roleDAO;
   }
 
   public void createUserRole(Role role) {
-    if (roleDAO.selectRoleById(role.id()).isPresent()) {
-      throw new EntityAlreadyExists("User role already exists");
-    }
+    // if (roleDAO.selectRoleById(role.id()).isPresent()) {
+    //   throw new EntityAlreadyExists(String.format("User role with id %d already exists", role.id()));
+    // }
 
     roleDAO.insertRole(role);
   }
