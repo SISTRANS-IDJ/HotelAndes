@@ -35,4 +35,10 @@ public class DataGeneratorController {
     public void dropTables() throws SQLException {
         dataGeneratorService.dropTables();
     }
+
+    @PostMapping("/tables/reset")
+    public void resetTables() throws SQLException {
+        this.dropTables();
+        this.createTables();
+    }
 }

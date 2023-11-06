@@ -7,6 +7,9 @@ import edu.uniandes.hotelandes.hotel.room.type.RoomType;
 import edu.uniandes.hotelandes.hotel.room.type.RoomTypeGenerator;
 import edu.uniandes.hotelandes.hotel.room.type.RoomTypeService;
 import edu.uniandes.hotelandes.account.consumption.AccountConsumptionGenerator;
+import edu.uniandes.hotelandes.user.User;
+import edu.uniandes.hotelandes.user.UserGenerator;
+import edu.uniandes.hotelandes.user.UserService;
 import edu.uniandes.hotelandes.user.role.Role;
 import edu.uniandes.hotelandes.user.role.RoleDAO;
 import edu.uniandes.hotelandes.user.role.RoleGenerator;
@@ -21,6 +24,7 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.context.ApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
@@ -41,6 +45,12 @@ class DataGeneratorService {
 	@Autowired
 	private RoomTypeService roomTypeService;
 
+	@Autowired
+	private UserService userService;
+
+	@Autowired
+	private UserGenerator userGenerator;
+
 	@Autowired 
 	private JdbcTemplate jdbcTemplate;
 
@@ -51,6 +61,7 @@ class DataGeneratorService {
 	public void insertData(){
 		this.insertRoles();
 		this.insertRoomTypes();
+		this.insertUsers();
 	}
 
 	public void createTables() throws SQLException{
@@ -76,6 +87,13 @@ class DataGeneratorService {
 		ArrayList<RoomType> roomTypes = RoomTypeGenerator.generateBasicRoomTypes(faker);
 		for (RoomType roomType:roomTypes){
 			roomTypeService.createRoomType(roomType);
+		}
+	}
+
+	public void insertUsers(){
+		for (int i = 0; i<100; i++){
+			User user =this.userGenerator.generateUser(faker);
+			this.userService.createUser(user);
 		}
 	}
 
