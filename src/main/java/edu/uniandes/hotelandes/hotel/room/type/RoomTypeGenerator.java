@@ -6,15 +6,6 @@ import java.util.List;
 import net.datafaker.Faker;
 
 public class RoomTypeGenerator {
-    
-    // public RoomType generateRoomType(Faker faker){
-    //     String name;
-    //     String description ;
-    //     Double price_per_night;
-    //     Short capacity ;
-
-    //     return new RoomType(null, name, description, price_per_night, capacity);
-    // }
 
     public static ArrayList<RoomType> generateBasicRoomTypes(Faker faker){
         ArrayList<RoomType> roomTypes = new ArrayList<RoomType>();
