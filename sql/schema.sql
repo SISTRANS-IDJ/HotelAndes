@@ -10,9 +10,9 @@ CREATE TABLE hotelandes_user
 (
     id        NUMBER(19) GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     id_type   VARCHAR2(2 CHAR)  NOT NULL,
-    id_number VARCHAR2(16 CHAR) NOT NULL,
+    id_number VARCHAR2(10 CHAR) NOT NULL,
     password  VARCHAR2(64 CHAR) NOT NULL,
-    name      VARCHAR2(32 CHAR) NOT NULL,
+    name      VARCHAR2(80 CHAR) NOT NULL,
     email     VARCHAR2(64 CHAR) NOT NULL UNIQUE,
     role_id   NUMBER(2)         NOT NULL,
     FOREIGN KEY (role_id) REFERENCES hotelandes_user_role (id)
