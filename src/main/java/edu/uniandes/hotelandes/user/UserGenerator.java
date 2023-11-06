@@ -17,15 +17,24 @@ import java.util.regex.Pattern;
 @Service
 public class UserGenerator {
 
-    @Autowired
     private  UserRoleService userRoleService;
-
-    private static Integer newid = 1;
-
-    private  Byte getValidUserRoleID(){
+    
+    private Integer newid = 1;
+    private List<Byte> nRoles = new ArrayList<Byte>();
+    private Random rand = new Random();
+    
+    @Autowired
+    public UserGenerator(UserRoleService userRoleService){
+        this.userRoleService = userRoleService;
         List<Role> roles = userRoleService.getRoles();
-        Random rand = new Random();
-        Byte id = roles.get(rand.nextInt(roles.size())).id();
+        for (Role r:roles){
+            nRoles.add(r.id());
+        }
+    }
+    
+    private  Byte getValidUserRoleID(){
+        // List<Role> roles = userRoleService.getRoles();
+        Byte id = nRoles.get(this.rand.nextInt(nRoles.size()));
         return id;
     }
     
