@@ -2,6 +2,10 @@ package edu.uniandes.hotelandes.dataGenerator;
 
 import edu.uniandes.hotelandes.account.consumption.AccountConsumption;
 import edu.uniandes.hotelandes.account.consumption.AccountConsumptionService;
+import edu.uniandes.hotelandes.hotel.room.service.HotelServiceService;
+import edu.uniandes.hotelandes.hotel.room.type.RoomType;
+import edu.uniandes.hotelandes.hotel.room.type.RoomTypeGenerator;
+import edu.uniandes.hotelandes.hotel.room.type.RoomTypeService;
 import edu.uniandes.hotelandes.account.consumption.AccountConsumptionGenerator;
 import edu.uniandes.hotelandes.user.role.Role;
 import edu.uniandes.hotelandes.user.role.RoleDAO;
@@ -10,6 +14,7 @@ import edu.uniandes.hotelandes.user.role.UserRoleService;
 import net.datafaker.Faker;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -23,8 +28,20 @@ class DataGeneratorService {
 	@Autowired
 	private UserRoleService userRoleService;
 
+	@Autowired
+	private HotelServiceService hotelServiceService;
+	
+	@Autowired
+	private RoomTypeService roomTypeService;
+
 	@Autowired 
 	private JdbcTemplate jdbcTemplate;
+
+
+	public void insertData(){
+		this.insertRoles();
+		this.insertRoomTypes();
+	}
 
 	public void insertRoles() {
 		ArrayList<Role> roles = RoleGenerator.generateRoles(this.faker);
@@ -32,6 +49,15 @@ class DataGeneratorService {
 			userRoleService.createUserRole(role);
 		}
 	}
+
+	public void insertRoomTypes(){
+		ArrayList<RoomType> roomTypes = RoomTypeGenerator.generateBasicRoomTypes(faker);
+		for (RoomType roomType:roomTypes){
+			roomTypeService.createRoomType(roomType);
+		}
+	}
+
+	
 
 	public void deleteDataBase(){
 		final ArrayList<String> tables = new ArrayList<String>();

@@ -15,7 +15,7 @@ public class DataGeneratorController {
 
     @PostMapping
     public void insertData(){
-        dataGeneratorService.insertRoles();
+        dataGeneratorService.insertData();
     }
 
     @DeleteMapping
