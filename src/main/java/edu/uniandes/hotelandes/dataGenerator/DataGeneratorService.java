@@ -13,12 +13,19 @@ import edu.uniandes.hotelandes.user.role.RoleGenerator;
 import edu.uniandes.hotelandes.user.role.UserRoleService;
 import net.datafaker.Faker;
 
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.jdbc.datasource.init.ScriptUtils;
+
 
 @Service
 class DataGeneratorService {
@@ -37,10 +44,25 @@ class DataGeneratorService {
 	@Autowired 
 	private JdbcTemplate jdbcTemplate;
 
+	@Autowired
+    private ApplicationContext applicationContext;
+
 
 	public void insertData(){
 		this.insertRoles();
 		this.insertRoomTypes();
+	}
+
+	public void createTables() throws SQLException{
+		DataSource ds = (DataSource)applicationContext.getBean("dataSource");
+		Connection c = ds.getConnection();
+		SpringScriptUtil.runScript("sql/schema.sql",c);
+	}
+	
+	public void dropTables() throws SQLException{
+		DataSource ds = (DataSource)applicationContext.getBean("dataSource");
+		Connection c = ds.getConnection();
+		SpringScriptUtil.runScript("sql/tear_down.sql",c);
 	}
 
 	public void insertRoles() {
