@@ -3,7 +3,7 @@ CREATE TABLE hotelandes_user_role
 (
     id          NUMBER(2) GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     role        VARCHAR(32 CHAR) NOT NULL,
-    description VARCHAR(32 CHAR)
+    description VARCHAR(1000 CHAR)
 );
 
 CREATE TABLE hotelandes_user
@@ -27,7 +27,7 @@ CREATE TABLE hotelandes_client
 
 CREATE TABLE hotel_room_type
 (
-    id                         NUMBER(2) PRIMARY KEY,
+    id                         NUMBER(2) GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     name                       VARCHAR2(60 CHAR) NOT NULL,
     description                VARCHAR2(1000 CHAR),
     price_per_night             NUMBER(10, 2)     NOT NULL,
