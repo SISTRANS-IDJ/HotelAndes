@@ -1,9 +1,14 @@
-DROP TABLE hotelandes_account_consumption PURGE;
-DROP TABLE hotelandes_client_account PURGE;
-DROP TABLE hotel_room_booking PURGE;
-DROP TABLE hotel_room PURGE;
-DROP TABLE hotel_room_type PURGE;
-DROP TABLE hotelandes_user_role PURGE;
-DROP TABLE hotelandes_client PURGE;
+DROP TABLE hotelandes_account_consumption CASCADE CONSTRAINTS PURGE;
+DROP TABLE hotelandes_client_account CASCADE CONSTRAINTS PURGE;
+DROP TABLE hotel_room_booking CASCADE CONSTRAINTS PURGE;
+DROP TABLE hotel_room CASCADE CONSTRAINTS PURGE;
+DROP TABLE hotel_room_type CASCADE CONSTRAINTS PURGE;
+DROP TABLE hotelandes_user_role CASCADE CONSTRAINTS PURGE;
+DROP TABLE hotelandes_client CASCADE CONSTRAINTS PURGE;
+DROP TABLE service_booking CASCADE CONSTRAINTS PURGE;
+DROP TABLE product CASCADE CONSTRAINTS PURGE;
+DROP TABLE hotelandes_user CASCADE CONSTRAINTS PURGE;
+DROP TABLE hotelandes_service CASCADE CONSTRAINTS PURGE;
+DROP TABLE consumption_plan CASCADE CONSTRAINTS PURGE;
 
 COMMIT;
