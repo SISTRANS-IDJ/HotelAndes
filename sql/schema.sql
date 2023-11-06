@@ -13,7 +13,7 @@ CREATE TABLE hotelandes_user
     id_number VARCHAR2(10 CHAR) NOT NULL,
     password  VARCHAR2(64 CHAR) NOT NULL,
     name      VARCHAR2(80 CHAR) NOT NULL,
-    email     VARCHAR2(64 CHAR) NOT NULL UNIQUE,
+    email     VARCHAR2(80 CHAR) NOT NULL UNIQUE,
     role_id   NUMBER(2)         NOT NULL,
     FOREIGN KEY (role_id) REFERENCES hotelandes_user_role (id)
 );
