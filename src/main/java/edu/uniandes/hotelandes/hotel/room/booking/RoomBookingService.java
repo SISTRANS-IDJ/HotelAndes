@@ -24,7 +24,6 @@ public class RoomBookingService {
             roomBooking.hotelRoomId(),
             roomBooking.checkIn(),
             roomBooking.checkOut(),
-            roomBooking.capacity(),
             roomBooking.consumptionPlanId());
     final var r = roomBookingDAO.insertRoomBooking(roomBookingCreate);
     if (r != 1) {

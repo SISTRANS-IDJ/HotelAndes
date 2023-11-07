@@ -8,5 +8,4 @@ public record RoomBooking(
     Integer hotelRoomId,
     Date checkIn,
     Date checkOut,
-    Byte capacity,
     Byte consumptionPlanId) {}

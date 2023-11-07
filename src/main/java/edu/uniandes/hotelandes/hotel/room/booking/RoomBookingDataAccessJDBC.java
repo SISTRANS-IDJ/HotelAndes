@@ -20,8 +20,8 @@ public class RoomBookingDataAccessJDBC implements RoomBookingDAO {
     final var sql =
         """
             INSERT INTO
-            hotel_room_booking(id, client_id, hotel_room_id,check_in, check_out, capacity, consumption_plan_id)
-            VALUES(?, ?, ?, ?, ?, ?, ?)
+            hotel_room_booking(id, client_id, hotel_room_id,check_in, check_out, consumption_plan_id)
+            VALUES(?, ?, ?, ?, ?, ?)
             """;
     return jdbcTemplate.update(
         sql,
@@ -30,7 +30,6 @@ public class RoomBookingDataAccessJDBC implements RoomBookingDAO {
         roomBooking.hotelRoomId(),
         roomBooking.checkIn(),
         roomBooking.checkOut(),
-        roomBooking.capacity(),
         roomBooking.consumptionPlanId());
   }
 
@@ -39,7 +38,7 @@ public class RoomBookingDataAccessJDBC implements RoomBookingDAO {
     final var sql =
         """
             SELECT
-            id, client_id, hotel_room_id,check_in, check_out, capacity, consumption_plan_id
+            id, client_id, hotel_room_id,check_in, check_out, consumption_plan_id
             FROM hotel_room_booking WHERE id = ?
             """;
     final var roomBookings = jdbcTemplate.query(sql, new RoomBookingRowMapper(), id);
@@ -51,7 +50,7 @@ public class RoomBookingDataAccessJDBC implements RoomBookingDAO {
     final var sql =
         """
             SELECT
-            id, client_id, hotel_room_id,check_in, check_out, capacity, consumption_plan_id
+            id, client_id, hotel_room_id,check_in, check_out, consumption_plan_id
             FROM hotel_room_booking
             """;
     return jdbcTemplate.query(sql, new RoomBookingRowMapper());
@@ -64,7 +63,7 @@ public class RoomBookingDataAccessJDBC implements RoomBookingDAO {
             UPDATE
             hotel_room_booking
             SET
-            client_id = ?, hotel_room_id = ?,check_in = ?, check_out = ?, capacity = ?, consumption_plan_id = ?
+            client_id = ?, hotel_room_id = ?,check_in = ?, check_out = ?, consumption_plan_id = ?
             WHERE id = ?
             """;
     return jdbcTemplate.update(
@@ -72,7 +71,6 @@ public class RoomBookingDataAccessJDBC implements RoomBookingDAO {
         roomBooking.clientId(),
         roomBooking.checkIn(),
         roomBooking.checkOut(),
-        roomBooking.capacity(),
         roomBooking.consumptionPlanId(),
         id);
   }

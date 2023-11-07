@@ -1,6 +1,7 @@
 package edu.uniandes.hotelandes.dataGenerator;
 
 import edu.uniandes.hotelandes.account.consumption.AccountConsumption;
+import edu.uniandes.hotelandes.account.consumption.AccountConsumptionController;
 import edu.uniandes.hotelandes.account.consumption.AccountConsumptionService;
 import edu.uniandes.hotelandes.hotel.room.Room;
 import edu.uniandes.hotelandes.hotel.room.RoomGenerator;
@@ -20,6 +21,8 @@ import edu.uniandes.hotelandes.account.consumption.AccountConsumptionGenerator;
 import edu.uniandes.hotelandes.user.User;
 import edu.uniandes.hotelandes.user.UserGenerator;
 import edu.uniandes.hotelandes.user.UserService;
+import edu.uniandes.hotelandes.user.client.account.AccountGenerator;
+import edu.uniandes.hotelandes.user.client.account.AccountService;
 import edu.uniandes.hotelandes.user.role.Role;
 import edu.uniandes.hotelandes.user.role.RoleGenerator;
 import edu.uniandes.hotelandes.user.role.UserRoleService;
@@ -80,6 +83,12 @@ class DataGeneratorService {
 	private ServiceBookingService serviceBookingService;
 
 	@Autowired
+	private AccountGenerator accountGenerator;
+
+	@Autowired
+	private AccountService accountService;
+
+	@Autowired
 	private RoomService roomService;
 
 	@Autowired
@@ -98,7 +107,7 @@ class DataGeneratorService {
 		this.insertUsers();
 		this.insertClients();
 
-		// TODO ROOM BOOKINGS
+		// this.insertAccounts();
 		// this.insertAccountConsumptions();
 		this.insertServiceBookings();
 	}
@@ -179,6 +188,12 @@ class DataGeneratorService {
 		for (int i = 0; i < 100; i++) {
 			var serviceBooking = serviceBookingGenerator.generateServiceBooking(faker);
 			this.serviceBookingService.createServiceBooking(serviceBooking);
+		}
+	}
+	public void insertAccounts() {
+		for (int i = 0; i < 100; i++) {
+			var account = accountGenerator.generateAccount(faker);
+			this.accountService.createAccount(account);
 		}
 	}
 

@@ -8,12 +8,11 @@ public class RoomBookingRowMapper implements RowMapper<RoomBooking> {
   @Override
   public RoomBooking mapRow(ResultSet rs, int i) throws SQLException {
     return new RoomBooking(
-        rs.getString("id"),
+        rs.getInt("id"),
         rs.getInt("clientId"),
         rs.getInt("hotel_room_id"),
         rs.getDate("check_in"),
         rs.getDate("check_out"),
-        rs.getByte("capacity"),
         rs.getByte("consumption_plan_id"));
   }
 }
