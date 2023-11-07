@@ -14,12 +14,11 @@ public class ProductGenerator {
      private HotelServiceService hotelServiceService;
 
      public Product generateProduct(Faker faker) {
-     Integer id = (Integer) faker.number().numberBetween(1, 100);
-     String name = faker.beer().name();
-     String description = faker.lorem().word();
-     Float cost = (float) faker.number().randomDouble(2, 0, 1000000);
-     Byte serviceID = (byte) getValidServiceId();
-     return new Product(id, name, description, cost, serviceID);
+         String name = faker.beer().name();
+         String description = faker.lorem().word();
+         Float cost = (float) faker.number().randomDouble(2, 0, 1000000);
+         Byte serviceID = (byte) getValidServiceId();
+         return new Product(null, name, description, cost, serviceID);
      }
 
      private int getValidServiceId() {

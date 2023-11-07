@@ -10,9 +10,8 @@ public class HotelServiceRowMapper implements RowMapper<HotelService> {
     return new HotelService(
         rs.getInt("id"),
         rs.getString("name"),
-        rs.getByte("hotel_id"),
         rs.getString("description"),
-        rs.getDate("opening_time"),
-        rs.getDate("closing_time"));
+        rs.getString("opening_time"),
+        rs.getString("closing_time"));
   }
 }

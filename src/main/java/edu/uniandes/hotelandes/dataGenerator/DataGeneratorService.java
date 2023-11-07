@@ -7,6 +7,8 @@ import edu.uniandes.hotelandes.hotel.room.hotelService.product.ProductGenerator;
 import edu.uniandes.hotelandes.hotel.room.hotelService.product.ProductService;
 import edu.uniandes.hotelandes.hotel.room.hotelService.serviceBooking.ServiceBookingGenerator;
 import edu.uniandes.hotelandes.hotel.room.hotelService.serviceBooking.ServiceBookingService;
+import edu.uniandes.hotelandes.hotel.room.service.HotelService;
+import edu.uniandes.hotelandes.hotel.room.service.HotelServiceGenerator;
 import edu.uniandes.hotelandes.hotel.room.service.HotelServiceService;
 import edu.uniandes.hotelandes.hotel.room.type.RoomType;
 import edu.uniandes.hotelandes.hotel.room.type.RoomTypeGenerator;
@@ -16,7 +18,6 @@ import edu.uniandes.hotelandes.user.User;
 import edu.uniandes.hotelandes.user.UserGenerator;
 import edu.uniandes.hotelandes.user.UserService;
 import edu.uniandes.hotelandes.user.role.Role;
-import edu.uniandes.hotelandes.user.role.RoleDAO;
 import edu.uniandes.hotelandes.user.role.RoleGenerator;
 import edu.uniandes.hotelandes.user.role.UserRoleService;
 import net.datafaker.Faker;
@@ -24,7 +25,6 @@ import net.datafaker.Faker;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.sql.DataSource;
 
@@ -82,9 +82,10 @@ class DataGeneratorService {
 
 
 	public void insertData(){
-		this.insertRoles();
-		this.insertRoomTypes();
+		//this.insertRoles();
+		//this.insertRoomTypes();
 		this.insertUsers();
+		this.insertServices();
 		//this.insertAccountConsumptions();
 		//this.insertProducts();
 		//this.insertServiceBookings();
@@ -120,6 +121,13 @@ class DataGeneratorService {
 		for (int i = 0; i<750000; i++){
 			User user =this.userGenerator.generateUser(faker);
 			this.userService.createUser(user);
+		}
+	}
+
+	public void insertServices(){
+		ArrayList<HotelService> services = HotelServiceGenerator.generateHotelServices(this.faker);
+		for (HotelService service: services){
+			hotelServiceService.createService(service);
 		}
 	}
 
@@ -163,17 +171,5 @@ class DataGeneratorService {
 			jdbcTemplate.update(sql + " "+ s);
 		}
 	}
-
-	// @Autowired
-	// private AccountConsumptionGenerator accountConsumptionGenerator;
-
-	// public void generateDataAccountConsumption(){
-	// Faker faker = new Faker();
-	// for(int i = 1; i < 500000; i++){
-	// AccountConsumption accountConsumption =
-	// accountConsumptionGenerator.generateAccountConsumption(faker);
-	// AccountConsumptionService.createAccountConsumption(accountConsumption);
-	// }
-	// }
 
 }
