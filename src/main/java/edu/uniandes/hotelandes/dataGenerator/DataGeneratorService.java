@@ -97,6 +97,8 @@ class DataGeneratorService {
 		this.insertProducts();
 		this.insertUsers();
 		this.insertClients();
+
+		// TODO ROOM BOOKINGS
 		// this.insertAccountConsumptions();
 		this.insertServiceBookings();
 	}

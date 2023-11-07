@@ -45,8 +45,8 @@ CREATE TABLE hotel_room_booking
     id                  NUMBER(19) GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     client_id           NUMBER(19),
     hotel_room_id       NUMBER(10) NOT NULL,
-    check_in            DATE       NOT NULL,
-    check_out           DATE       NOT NULL,
+    check_in            TIMESTAMP[0]       NOT NULL,
+    check_out           TIMESTAMP[0]       NOT NULL,
     capacity            NUMBER(1)  NOT NULL,
     consumption_plan_id NUMBER(3),
     FOREIGN KEY (hotel_room_id) REFERENCES hotel_room (id),
@@ -57,6 +57,8 @@ CREATE TABLE hotelandes_client_account
 (
     id              NUMBER(19) GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     room_booking_id NUMBER(19) NOT NULL,
+    total NUMBER(20,2) NOT NULL,
+    balance NUMBER(20,2) NOT NULL,
     state           VARCHAR2(8 CHAR)  NOT NULL CHECK ( state in ('OPEN', 'CLOSE') ),
     FOREIGN KEY (room_booking_id) REFERENCES hotel_room_booking (id)
 );
