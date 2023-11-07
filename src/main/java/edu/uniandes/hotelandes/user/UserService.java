@@ -33,7 +33,7 @@ public class UserService {
   }
 
   public User updateUser(Integer id, User user) {
-    final var users = userDAO.selectUserById(user.id());
+    final var users = userDAO.selectUserById(id);
     if (users.isPresent()) {
       final var u = userDAO.updateUser(id, user);
       if (u != 1) {
