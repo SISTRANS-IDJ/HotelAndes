@@ -2,6 +2,11 @@ package edu.uniandes.hotelandes.dataGenerator;
 
 import edu.uniandes.hotelandes.account.consumption.AccountConsumption;
 import edu.uniandes.hotelandes.account.consumption.AccountConsumptionService;
+import edu.uniandes.hotelandes.hotel.room.hotelService.product.Product;
+import edu.uniandes.hotelandes.hotel.room.hotelService.product.ProductGenerator;
+import edu.uniandes.hotelandes.hotel.room.hotelService.product.ProductService;
+import edu.uniandes.hotelandes.hotel.room.hotelService.serviceBooking.ServiceBookingGenerator;
+import edu.uniandes.hotelandes.hotel.room.hotelService.serviceBooking.ServiceBookingService;
 import edu.uniandes.hotelandes.hotel.room.service.HotelServiceService;
 import edu.uniandes.hotelandes.hotel.room.type.RoomType;
 import edu.uniandes.hotelandes.hotel.room.type.RoomTypeGenerator;
@@ -51,6 +56,24 @@ class DataGeneratorService {
 	@Autowired
 	private UserGenerator userGenerator;
 
+	@Autowired
+	private AccountConsumptionService accountConsumptionService;
+
+	@Autowired
+	private AccountConsumptionGenerator accountConsumptionGenerator;
+
+	@Autowired
+	private ProductGenerator productGenerator;
+
+	@Autowired
+	private ProductService productService;
+
+	@Autowired
+	private ServiceBookingGenerator serviceBookingGenerator;
+
+	@Autowired
+	private ServiceBookingService serviceBookingService;
+
 	@Autowired 
 	private JdbcTemplate jdbcTemplate;
 
@@ -62,6 +85,9 @@ class DataGeneratorService {
 		this.insertRoles();
 		this.insertRoomTypes();
 		this.insertUsers();
+		//this.insertAccountConsumptions();
+		//this.insertProducts();
+		//this.insertServiceBookings();
 	}
 
 	public void createTables() throws SQLException{
@@ -98,7 +124,26 @@ class DataGeneratorService {
 		}
 	}
 
-	
+	public void insertAccountConsumptions(){
+		for (int i = 0; i<750000; i++){
+			AccountConsumption accountConsumption = accountConsumptionGenerator.generateAccountConsumption(faker);
+			this.accountConsumptionService.createAccountConsumption(accountConsumption);
+		}
+	}
+
+	public void insertProducts(){
+		for (int i = 0; i<10000; i++){
+			Product product = productGenerator.generateProduct(faker);
+			this.productService.createProduct(product);
+		}
+	}
+
+	public void insertServiceBookings(){
+		for (int i = 0; i<750000; i++){
+			var serviceBooking = serviceBookingGenerator.generateServiceBooking(faker);
+			this.serviceBookingService.createServiceBooking(serviceBooking);
+		}
+	}
 
 	public void deleteDataBase(){
 		final ArrayList<String> tables = new ArrayList<String>();
