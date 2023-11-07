@@ -1,7 +1,3 @@
 package edu.uniandes.hotelandes.user.client;
 
-public record Client(
-    Integer id
-) {
-    
-}
+public record Client(Integer id) {}

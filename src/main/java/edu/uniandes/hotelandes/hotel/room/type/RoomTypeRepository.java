@@ -18,7 +18,8 @@ public class RoomTypeRepository implements RoomTypeDao {
   @Override
   public int insertRoomType(RoomType roomType) {
     final var sql =
-        "INSERT INTO hotel_room_type(name, description, capacity, price_per_night) VALUES( ?, ?, ?,?)";
+        "INSERT INTO hotel_room_type(name, description, capacity, price_per_night) VALUES( ?, ?,"
+            + " ?,?)";
     return jdbcTemplate.update(
         sql,
         roomType.name(),

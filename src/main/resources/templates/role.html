@@ -13,7 +13,7 @@
     <nav class="navbar navbar-expand-lg bg-dark sticky-top shadow" data-bs-theme="dark"
          id="mainNavbar">
         <div class="container-fluid">
-            <a class="navbar-brand">HotelAndes</a>
+            <a class="navbar-brand" href="/">HotelAndes</a>
         </div>
     </nav>
 </header>
@@ -28,7 +28,7 @@
                 </a>
                 <div class="collapse" id="collapseUser">
                     <div class="d-flex flex-column">
-                        <a class="text-center text-decoration-none text-reset">
+                        <a class="text-center text-decoration-none text-reset" href="/role">
                             <span class="fs-6 fw-semibold">Rol</span>
                         </a>
                         <a class="text-center text-decoration-none text-reset">
@@ -61,21 +61,23 @@
                             <th scope="col">acciones</th>
                             </thead>
                             <tbody class="table-group-divider">
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>admin</td>
-                                <td>HotelAndes admin</td>
-                                <td>
-                                    <div class="d-flex gap-2">
-                                        <a href="#">
-                                            Modificar
-                                        </a>
-                                        <a href="#">
-                                            Borrar
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
+                            <th:block th:each="role : ${roles}">
+                                <tr>
+                                    <th scope="row" th:text="${role.id()}"></th>
+                                    <td th:text="${role.role()}">admin</td>
+                                    <td th:text="${role.description()}">HotelAndes admin</td>
+                                    <td>
+                                        <div class="d-flex gap-2">
+                                            <a href="#">
+                                                Modificar
+                                            </a>
+                                            <a th:href="@{/role/{id}/delete(id=${role.id()})}" onclick="return confirm('¿Estás seguro de borrarlo')">
+                                                Borrar
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </th:block>
                             </tbody>
                         </table>
                     </div>
