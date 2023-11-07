@@ -98,7 +98,7 @@ class DataGeneratorService {
 		this.insertUsers();
 		this.insertClients();
 		// this.insertAccountConsumptions();
-		this.insertServiceBookings();
+		//this.insertServiceBookings();
 	}
 
 	public void createTables() throws SQLException {
@@ -135,7 +135,7 @@ class DataGeneratorService {
 	}
 
 	public void insertUsers() {
-		for (int i = 0; i < 1000; i++) {
+		for (int i = 0; i < 100; i++) {
 
 			User user = this.userGenerator.generateUser(faker);
 			this.userService.createUser(user, false);

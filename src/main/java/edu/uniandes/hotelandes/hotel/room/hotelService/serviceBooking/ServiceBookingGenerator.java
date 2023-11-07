@@ -22,7 +22,7 @@ public class ServiceBookingGenerator {
             Date bookingStart = faker.date().birthday();
             Date bookingEnd = faker.date().birthday();
             Byte serviceId = (byte) getValidServiceId();
-            Byte userId = (byte) getValidUserId();
+            Byte userId = (byte) getValidClientId();
             return new ServiceBooking(null, bookingStart, bookingEnd, serviceId, userId);
 
         }
@@ -34,10 +34,16 @@ public class ServiceBookingGenerator {
             return id;
         }
 
-        private int getValidUserId() {
+        private int getValidClientId() {
+            boolean sent = true;
             final var users = userService.getUsers();
             Random random = new Random();
-            int id = users.get(random.nextInt(users.size())).id();
+            int id = 0;
+            while(sent) {
+                if (users.get(random.nextInt(users.size())).role_id() == 1) ;
+                    id = users.get(random.nextInt(users.size())).id();
+                    sent = false;
+            }
             return id;
         }
 }
