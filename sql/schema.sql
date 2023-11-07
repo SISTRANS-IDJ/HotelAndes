@@ -1,4 +1,3 @@
-
 CREATE TABLE hotelandes_user_role
 (
     id          NUMBER(2) GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -17,8 +16,6 @@ CREATE TABLE hotelandes_user
     role_id   NUMBER(2)         NOT NULL,
     FOREIGN KEY (role_id) REFERENCES hotelandes_user_role (id)
 );
-
---CREATE INDEX user_email_idx ON hotelandes_user(email);
 
 CREATE TABLE hotelandes_client
 (
@@ -45,7 +42,7 @@ CREATE TABLE hotel_room
 
 CREATE TABLE hotel_room_booking
 (
-    id                  VARCHAR2(32 CHAR) GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    id                  NUMBER(19) GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     client_id           NUMBER(19),
     hotel_room_id       NUMBER(10) NOT NULL,
     check_in            DATE       NOT NULL,
@@ -59,7 +56,7 @@ CREATE TABLE hotel_room_booking
 CREATE TABLE hotelandes_client_account
 (
     id              NUMBER(19) GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    room_booking_id VARCHAR2(32 CHAR) NOT NULL,
+    room_booking_id NUMBER(19) NOT NULL,
     state           VARCHAR2(8 CHAR)  NOT NULL CHECK ( state in ('OPEN', 'CLOSE') ),
     FOREIGN KEY (room_booking_id) REFERENCES hotel_room_booking (id)
 );
