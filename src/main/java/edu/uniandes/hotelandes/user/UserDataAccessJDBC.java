@@ -70,7 +70,7 @@ public class UserDataAccessJDBC implements UserDAO {
 
   @Override
   public int updateUser(Integer id, User user) {
-    final var sql = "UPDATE user SET name = ?, email = ?, id_type = ?, id_number = ?, password = ?, role_id = ?"
+    final var sql = "UPDATE hotelandes_user SET name = ?, email = ?, id_type = ?, id_number = ?, password = ?, role_id = ?"
         + " WHERE id = ?";
     return jdbcTemplate.update(
         sql,
@@ -85,7 +85,7 @@ public class UserDataAccessJDBC implements UserDAO {
 
   @Override
   public int deleteUser(Integer id) {
-    final var sql = "DELETE FROM user WHERE CASE id = ?";
+    final var sql = "DELETE FROM hotelandes_user WHERE CASE id = ?";
     return jdbcTemplate.update(sql, id);
   }
 }
