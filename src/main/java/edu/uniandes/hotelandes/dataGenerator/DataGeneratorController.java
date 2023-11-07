@@ -28,7 +28,7 @@ public class DataGeneratorController {
     @PostMapping("/tables")
     public void createTables() throws SQLException {
         dataGeneratorService.createTables();
-        dataGeneratorService.insertData();
+        // dataGeneratorService.insertData();
     }
 
     @DeleteMapping("/tables")
