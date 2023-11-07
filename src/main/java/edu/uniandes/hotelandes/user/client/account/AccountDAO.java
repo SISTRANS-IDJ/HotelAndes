@@ -7,7 +7,6 @@ public interface AccountDAO {
     int insertAccount(Account account);
     Optional<Account> selectAccountById(Integer id);
     List<Account> selectAccounts();
-    int increaseTotal(Integer id, Float cost);
-    int decreaseBalance(Integer id, Float cost);
+    int updateAccount(Integer id, Account newAccount);
     
 }

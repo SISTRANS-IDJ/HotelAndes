@@ -5,9 +5,10 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import edu.uniandes.hotelandes.exception.EntityNotFoundException;
-
+@Repository
 public class AccountRepository implements AccountDAO {
 
     private final JdbcTemplate jdbcTemplate;
@@ -31,7 +32,7 @@ public class AccountRepository implements AccountDAO {
     @Override
     public Optional<Account> selectAccountById(Integer id) {
         final var sql = """
-                SELECT *
+                SELECT id, room_booking_id, total, balance, state
                 FROM hotelandes_client_account
                 WHERE id = ?
                 """;
@@ -41,35 +42,19 @@ public class AccountRepository implements AccountDAO {
 
     @Override
     public List<Account> selectAccounts() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'selectAccounts'");
+       final var sql = """
+               SELECT id, room_booking_id, total, balance, state
+               FROM hotelandes_client_account
+               """;
+        return jdbcTemplate.query(sql, new AccountRowMapper());
     }
 
     @Override
-    public int increaseTotal(Integer id, Float cost) {
-        Optional<Account> acc = this.selectAccountById(id);
-        if (acc.isPresent()) {
-            Account account = acc.get();
-            Account newAccount = new Account(account.id(), account.room_booking_id(), account.total() + cost,
-                    account.balance(), account.state());
-            return this.insertAccount(newAccount);
-        } else {
-            throw new EntityNotFoundException("No se encontro la cuenta");
-        }
-
+    public int updateAccount(Integer id, Account newAccount) {
+        final var sql = "UPDATE "
+        
     }
 
-    @Override
-    public int decreaseBalance(Integer id, Float cost) {
-        Optional<Account> acc = this.selectAccountById(id);
-        if (acc.isPresent()) {
-            Account account = acc.get();
-            Account newAccount = new Account(account.id(), account.room_booking_id(), account.total(),
-                    account.balance()-cost, account.state());
-            return this.insertAccount(newAccount);
-        } else {
-            throw new EntityNotFoundException("No se encontro la cuenta");
-        }
-    }
+   
 
 }
