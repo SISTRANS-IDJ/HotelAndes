@@ -4,7 +4,7 @@ import java.util.Date;
 
 public record RoomBooking(
     String id,
-    Long clientId,
+    Integer clientId,
     Integer hotelRoomId,
     Date checkIn,
     Date checkOut,

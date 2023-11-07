@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import edu.uniandes.hotelandes.exception.EntityNotFoundException;
+
 @Repository
 public class AccountRepository implements AccountDAO {
 
@@ -42,19 +43,25 @@ public class AccountRepository implements AccountDAO {
 
     @Override
     public List<Account> selectAccounts() {
-       final var sql = """
-               SELECT id, room_booking_id, total, balance, state
-               FROM hotelandes_client_account
-               """;
+        final var sql = """
+                SELECT id, room_booking_id, total, balance, state
+                FROM hotelandes_client_account
+                """;
         return jdbcTemplate.query(sql, new AccountRowMapper());
     }
 
     @Override
     public int updateAccount(Integer id, Account newAccount) {
-        final var sql = "UPDATE "
-        
+        final var sql = """
+                UPDATE hotelandes_client_account
+                SET  room_booking_id = ?, total = ?, balance = ?, state = ?
+                """;
+        return jdbcTemplate.update(
+                sql,
+                newAccount.room_booking_id(),
+                newAccount.total(),
+                newAccount.balance(),
+                newAccount.state());
     }
-
-   
 
 }

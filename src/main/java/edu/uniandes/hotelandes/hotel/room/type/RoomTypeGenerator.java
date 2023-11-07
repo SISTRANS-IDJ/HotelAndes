@@ -13,7 +13,7 @@ public class RoomTypeGenerator {
             String description = faker.lorem().paragraph();
             Double price_per_night = faker.number().randomDouble(2, 100000, 600000);
             // Short capacity = (short) faker.number().numberBetween(2, 6);
-            roomTypes.add(new RoomType(null, r.getValue(), description, price_per_night, (short)r.getCapacity()));
+            roomTypes.add(new RoomType(null, r.name(), description, price_per_night, (short)r.getCapacity()));
         }
         return roomTypes;
     }
