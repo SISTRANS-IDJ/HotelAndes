@@ -18,7 +18,7 @@ public class ServiceBookingDataAccessJDBC implements ServiceBookingDAO {
   @Override
   public int insertServiceBooking(ServiceBooking serviceBooking) {
     final var sql =
-        "INSERT INTO service_booking(booking_start, booking_end, service_id, user_id)"
+        "INSERT INTO service_booking(booking_start, booking_end, service_id, client_id)"
             + " VALUES(?, ?, ?, ?)";
     return jdbcTemplate.update(
         sql,

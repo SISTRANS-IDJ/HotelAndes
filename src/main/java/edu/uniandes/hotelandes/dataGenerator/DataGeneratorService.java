@@ -92,7 +92,6 @@ class DataGeneratorService {
 
 	public void insertData(){
 		this.insertRoles();
-
 		this.insertRoomTypes();
 		this.insertRooms();
 		this.insertUsers();
@@ -136,7 +135,7 @@ class DataGeneratorService {
 	}
 
 	public void insertUsers(){
-		for (int i = 0; i<75000; i++){
+		for (int i = 0; i<100; i++){
 
 			User user =this.userGenerator.generateUser(faker);
 			this.userService.createUser(user);
