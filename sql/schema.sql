@@ -57,6 +57,8 @@ CREATE TABLE hotelandes_client_account
 (
     id              NUMBER(19) GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     room_booking_id NUMBER(19) NOT NULL,
+    total NUMBER(20,2) NOT NULL,
+    balance NUMBER(20,2) NOT NULL,
     state           VARCHAR2(8 CHAR)  NOT NULL CHECK ( state in ('OPEN', 'CLOSE') ),
     FOREIGN KEY (room_booking_id) REFERENCES hotel_room_booking (id)
 );
