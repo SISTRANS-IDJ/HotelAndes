@@ -98,7 +98,7 @@ class DataGeneratorService {
 		this.insertUsers();
 		this.insertClients();
 		// this.insertAccountConsumptions();
-		//this.insertServiceBookings();
+		this.insertServiceBookings();
 	}
 
 	public void createTables() throws SQLException {
