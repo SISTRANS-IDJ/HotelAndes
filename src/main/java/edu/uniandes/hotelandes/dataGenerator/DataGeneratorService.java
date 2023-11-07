@@ -71,6 +71,7 @@ class DataGeneratorService {
   public void insertData() {
     this.insertRoles();
 
+<<<<<<< HEAD
     this.insertRoomTypes();
     this.insertRooms();
     this.insertServices();
@@ -80,6 +81,19 @@ class DataGeneratorService {
     // this.insertAccountConsumptions();
     // this.insertServiceBookings();
   }
+=======
+		this.insertRoomTypes();
+		this.insertRooms();
+		this.insertServices();
+		this.insertProducts();
+		this.insertUsers();
+		this.insertClients();
+
+		// TODO ROOM BOOKINGS
+		// this.insertAccountConsumptions();
+		this.insertServiceBookings();
+	}
+>>>>>>> feature-data-generation
 
   public void createTables() throws SQLException {
     DataSource ds = (DataSource) applicationContext.getBean("dataSource");
