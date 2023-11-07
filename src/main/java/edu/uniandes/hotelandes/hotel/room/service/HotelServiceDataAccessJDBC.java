@@ -18,7 +18,7 @@ public class HotelServiceDataAccessJDBC implements HotelServiceDAO {
   @Override
   public int insertService(HotelService service) {
     final var sql =
-        "INSERT INTO hotel_service(name, description, opening_time, closing_time)"
+        "INSERT INTO hotelandes_service(name, description, opening_time, closing_time)"
             + " VALUES(?, ?, ?, ?)";
     return jdbcTemplate.update(
         sql,
@@ -32,7 +32,7 @@ public class HotelServiceDataAccessJDBC implements HotelServiceDAO {
   @Override
   public Optional<HotelService> selectServiceById(int id) {
     final var sql =
-        "SELECT id, name, description, opening_time, closing_time FROM hotel_service"
+        "SELECT id, name, description, opening_time, closing_time FROM hotelandes_service"
             + " WHERE id = ?";
     final var service = jdbcTemplate.query(sql, new HotelServiceRowMapper(), id);
     return service.stream().findFirst();
@@ -41,14 +41,14 @@ public class HotelServiceDataAccessJDBC implements HotelServiceDAO {
   @Override
   public List<HotelService> selectServices() {
     final var sql =
-        "SELECT id, name, description, opening_time, closing_time FROM hotel_service";
+        "SELECT id, name, description, opening_time, closing_time FROM hotelandes_service";
     return jdbcTemplate.query(sql, new HotelServiceRowMapper());
   }
 
   @Override
   public int updateService(int id, HotelService service) {
     final var sql =
-        "UPDATE hotel_service SET name = ?, description = ?, opening_time = ?, closing_time = ?,"
+        "UPDATE hotelandes_service SET name = ?, description = ?, opening_time = ?, closing_time = ?,"
             + " WHERE id = ?";
     return jdbcTemplate.update(
         sql,
@@ -61,7 +61,7 @@ public class HotelServiceDataAccessJDBC implements HotelServiceDAO {
 
   @Override
   public int deleteService(int id) {
-    final var sql = "DELETE FROM hotel_service WHERE CASE id = ?";
+    final var sql = "DELETE FROM hotelandes_service WHERE CASE id = ?";
     return jdbcTemplate.update(sql, id);
   }
 }

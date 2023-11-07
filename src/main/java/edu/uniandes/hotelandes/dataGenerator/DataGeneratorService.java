@@ -82,13 +82,13 @@ class DataGeneratorService {
 
 
 	public void insertData(){
-		//this.insertRoles();
+		this.insertRoles();
 		//this.insertRoomTypes();
 		this.insertUsers();
 		this.insertServices();
 		//this.insertAccountConsumptions();
-		//this.insertProducts();
-		//this.insertServiceBookings();
+		this.insertProducts();
+		this.insertServiceBookings();
 	}
 
 	public void createTables() throws SQLException{
@@ -118,7 +118,7 @@ class DataGeneratorService {
 	}
 
 	public void insertUsers(){
-		for (int i = 0; i<750000; i++){
+		for (int i = 0; i<100; i++){
 			User user =this.userGenerator.generateUser(faker);
 			this.userService.createUser(user);
 
@@ -133,21 +133,21 @@ class DataGeneratorService {
 	}
 
 	public void insertAccountConsumptions(){
-		for (int i = 0; i<750000; i++){
+		for (int i = 0; i<1000; i++){
 			AccountConsumption accountConsumption = accountConsumptionGenerator.generateAccountConsumption(faker);
 			this.accountConsumptionService.createAccountConsumption(accountConsumption);
 		}
 	}
 
 	public void insertProducts(){
-		for (int i = 0; i<10000; i++){
+		for (int i = 0; i<100; i++){
 			Product product = productGenerator.generateProduct(faker);
 			this.productService.createProduct(product);
 		}
 	}
 
 	public void insertServiceBookings(){
-		for (int i = 0; i<750000; i++){
+		for (int i = 0; i<100; i++){
 			var serviceBooking = serviceBookingGenerator.generateServiceBooking(faker);
 			this.serviceBookingService.createServiceBooking(serviceBooking);
 		}

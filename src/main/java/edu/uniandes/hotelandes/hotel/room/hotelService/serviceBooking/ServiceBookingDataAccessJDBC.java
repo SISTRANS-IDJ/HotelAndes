@@ -18,11 +18,10 @@ public class ServiceBookingDataAccessJDBC implements ServiceBookingDAO {
   @Override
   public int insertServiceBooking(ServiceBooking serviceBooking) {
     final var sql =
-        "INSERT INTO hotel_service_booking(id, booking_start, booking_end, service_id, user_id)"
-            + " VALUES(?, ?, ?, ?, ?)";
+        "INSERT INTO service_booking(booking_start, booking_end, service_id, user_id)"
+            + " VALUES(?, ?, ?, ?)";
     return jdbcTemplate.update(
         sql,
-        serviceBooking.id(),
         serviceBooking.bookingStart(),
         serviceBooking.bookingEnd(),
         serviceBooking.serviceId(),
@@ -32,7 +31,7 @@ public class ServiceBookingDataAccessJDBC implements ServiceBookingDAO {
   @Override
   public Optional<ServiceBooking> selectServiceBookingById(int id) {
     final var sql =
-        "SELECT id, booking_start, booking_end, service_id, user_id FROM hotel_service_booking"
+        "SELECT id, booking_start, booking_end, service_id, user_id FROM service_booking"
             + " WHERE id = ?";
     final var serviceBooking = jdbcTemplate.query(sql, new ServiceBookingRowMapper(), id);
     return serviceBooking.stream().findFirst();
@@ -41,14 +40,14 @@ public class ServiceBookingDataAccessJDBC implements ServiceBookingDAO {
   @Override
   public List<ServiceBooking> selectServiceBookings() {
     final var sql =
-        "SELECT id, booking_start, booking_end, service_id, user_id FROM hotel_service_booking";
+        "SELECT id, booking_start, booking_end, service_id, user_id FROM service_booking";
     return jdbcTemplate.query(sql, new ServiceBookingRowMapper());
   }
 
   @Override
   public int updateServiceBooking(int id, ServiceBooking serviceBooking) {
     final var sql =
-        "UPDATE hotel_service_booking SET booking_start = ?, booking_end = ?, service_id = ?,"
+        "UPDATE service_booking SET booking_start = ?, booking_end = ?, service_id = ?,"
             + " user_id = ? WHERE id = ?";
     return jdbcTemplate.update(
         sql,
@@ -61,7 +60,7 @@ public class ServiceBookingDataAccessJDBC implements ServiceBookingDAO {
 
   @Override
   public int deleteServiceBooking(int id) {
-    final var sql = "DELETE FROM hotel_service_booking WHERE id = ?";
+    final var sql = "DELETE FROM service_booking WHERE id = ?";
     return jdbcTemplate.update(sql, id);
   }
 }

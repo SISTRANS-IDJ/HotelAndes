@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class HotelServiceGenerator {
 
     static public ArrayList<HotelService> generateHotelServices(Faker faker){
-        ArrayList<HotelService> services = new ArrayList<>();
+        ArrayList<HotelService> services = new ArrayList<HotelService>();
         String description = faker.lorem().paragraph();
         HotelService pool = new HotelService(null, Services.POOL.name(), description, "08:00","18:00");
         services.add(pool);

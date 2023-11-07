@@ -14,8 +14,8 @@ public class ProductGenerator {
      private HotelServiceService hotelServiceService;
 
      public Product generateProduct(Faker faker) {
-         String name = faker.beer().name();
-         String description = faker.lorem().word();
+         String name = faker.lorem().word();
+         String description = faker.lorem().paragraph();
          Float cost = (float) faker.number().randomDouble(2, 0, 1000000);
          Byte serviceID = (byte) getValidServiceId();
          return new Product(null, name, description, cost, serviceID);

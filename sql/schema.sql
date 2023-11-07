@@ -65,10 +65,9 @@ CREATE TABLE hotelandes_service
 (
     id           NUMBER(19) GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     name         VARCHAR2(32 CHAR) NOT NULL,
-    description  VARCHAR2(64 CHAR) NOT NULL,
-    opening_time DATE              NOT NULL,
-    closing_time DATE              NOT NULL,
-    hotel_id     NUMBER(19)        NOT NULL
+    description  VARCHAR2(1000 CHAR) NOT NULL,
+    opening_time VARCHAR2(16 CHAR)              NOT NULL,
+    closing_time VARCHAR2(16 CHAR)              NOT NULL
 );
 
 
@@ -96,7 +95,7 @@ CREATE TABLE product
 (
     id          NUMBER(19) GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     name        VARCHAR2(32 CHAR) NOT NULL,
-    description VARCHAR2(64 CHAR) NOT NULL,
+    description VARCHAR2(1000 CHAR) NOT NULL,
     price       NUMBER(19)        NOT NULL,
     service_id  NUMBER(19)        NOT NULL,
     FOREIGN KEY (service_id) REFERENCES hotelandes_service (id)

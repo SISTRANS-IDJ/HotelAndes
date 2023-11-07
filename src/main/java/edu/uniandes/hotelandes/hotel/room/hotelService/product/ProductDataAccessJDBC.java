@@ -18,7 +18,7 @@ public class ProductDataAccessJDBC implements ProductDAO {
   @Override
   public int insertProduct(Product product) {
     final var sql =
-        "INSERT INTO hotel_product(name, description, cost, service_id) VALUES(?, ?, ?, ?)";
+        "INSERT INTO product(name, description, price, service_id) VALUES(?, ?, ?, ?)";
     return jdbcTemplate.update(
         sql, product.name(), product.description(), product.cost(), product.serviceId());
   }
@@ -26,28 +26,28 @@ public class ProductDataAccessJDBC implements ProductDAO {
   @Override
   public Optional<Product> selectProductById(int id) {
     final var sql =
-        "SELECT id, name, description, cost, service_id FROM hotel_product WHERE id = ?";
+        "SELECT id, name, description, cost, service_id FROM product WHERE id = ?";
     final var products = jdbcTemplate.query(sql, new ProductRowMapper(), id);
     return products.stream().findFirst();
   }
 
   @Override
   public List<Product> selectProducts() {
-    final var sql = "SELECT id, name, description, cost, service_id FROM hotel_product";
+    final var sql = "SELECT id, name, description, cost, service_id FROM product";
     return jdbcTemplate.query(sql, new ProductRowMapper());
   }
 
   @Override
   public int updateProduct(int id, Product product) {
     final var sql =
-        "UPDATE hotel_product SET name = ?, description = ?, cost = ?, service_id = ? WHERE id = ?";
+        "UPDATE product SET name = ?, description = ?, cost = ?, service_id = ? WHERE id = ?";
     return jdbcTemplate.update(
         sql, product.name(), product.description(), product.cost(), product.serviceId(), id);
   }
 
   @Override
   public int deleteProduct(int id) {
-    final var sql = "DELETE FROM hotel_product WHERE id = ?";
+    final var sql = "DELETE FROM product WHERE id = ?";
     return jdbcTemplate.update(sql, id);
   }
 }
