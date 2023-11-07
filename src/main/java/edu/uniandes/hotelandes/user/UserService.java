@@ -21,7 +21,7 @@ public class UserService {
     }
   }
 
-  public User getUser(Short id) {
+  public User getUser(Integer id) {
     return userDAO
         .selectUserById(id)
         .orElseThrow(
@@ -32,7 +32,7 @@ public class UserService {
     return userDAO.selectUsers();
   }
 
-  public User updateUser(Short id, User user) {
+  public User updateUser(Integer id, User user) {
     final var users = userDAO.selectUserById(user.id());
     if (users.isPresent()) {
       final var u = userDAO.updateUser(id, user);
@@ -45,7 +45,7 @@ public class UserService {
     }
   }
 
-  public void deleteUser(Short id) {
+  public void deleteUser(Integer id) {
     final var users = userDAO.selectUserById(id);
     users.ifPresent(
         user -> {

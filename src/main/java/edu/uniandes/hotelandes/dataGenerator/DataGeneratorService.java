@@ -94,6 +94,7 @@ class DataGeneratorService {
 		for (int i = 0; i<750000; i++){
 			User user =this.userGenerator.generateUser(faker);
 			this.userService.createUser(user);
+
 		}
 	}
 

@@ -6,11 +6,11 @@ import java.util.Optional;
 public interface UserDAO {
   int insertUser(User user);
 
-  Optional<User> selectUserById(short id);
+  Optional<User> selectUserById(Integer id);
 
   List<User> selectUsers();
 
-  int updateUser(Short id, User role);
+  int updateUser(Integer id, User role);
 
-  int deleteUser(int id);
+  int deleteUser(Integer id);
 }
