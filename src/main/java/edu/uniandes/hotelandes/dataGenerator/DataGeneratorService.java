@@ -2,6 +2,9 @@ package edu.uniandes.hotelandes.dataGenerator;
 
 import edu.uniandes.hotelandes.account.consumption.AccountConsumption;
 import edu.uniandes.hotelandes.account.consumption.AccountConsumptionService;
+import edu.uniandes.hotelandes.hotel.room.Room;
+import edu.uniandes.hotelandes.hotel.room.RoomGenerator;
+import edu.uniandes.hotelandes.hotel.room.RoomService;
 import edu.uniandes.hotelandes.hotel.room.hotelService.product.Product;
 import edu.uniandes.hotelandes.hotel.room.hotelService.product.ProductGenerator;
 import edu.uniandes.hotelandes.hotel.room.hotelService.product.ProductService;
@@ -63,6 +66,9 @@ class DataGeneratorService {
 	private AccountConsumptionGenerator accountConsumptionGenerator;
 
 	@Autowired
+	private RoomGenerator roomGenerator;
+
+	@Autowired
 	private ProductGenerator productGenerator;
 
 	@Autowired
@@ -74,6 +80,9 @@ class DataGeneratorService {
 	@Autowired
 	private ServiceBookingService serviceBookingService;
 
+	@Autowired
+	private RoomService roomService;
+
 	@Autowired 
 	private JdbcTemplate jdbcTemplate;
 
@@ -84,6 +93,7 @@ class DataGeneratorService {
 	public void insertData(){
 		this.insertRoles();
 		this.insertRoomTypes();
+		this.insertRooms();
 		this.insertUsers();
 		//this.insertAccountConsumptions();
 		//this.insertProducts();
@@ -116,8 +126,15 @@ class DataGeneratorService {
 		}
 	}
 
+	public void insertRooms(){
+		ArrayList<Room> rooms = this.roomGenerator.generateRooms();
+		for (Room r: rooms){
+			this.roomService.createRoom(r);
+		}
+	}
+
 	public void insertUsers(){
-		for (int i = 0; i<750000; i++){
+		for (int i = 0; i<75000; i++){
 			User user =this.userGenerator.generateUser(faker);
 			this.userService.createUser(user);
 
