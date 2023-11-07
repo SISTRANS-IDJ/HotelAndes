@@ -21,6 +21,7 @@ dependencies {
   runtimeOnly("com.oracle.database.jdbc:ojdbc11")
   testImplementation("org.springframework.boot:spring-boot-starter-test")
   implementation("net.datafaker:datafaker:2.0.2")
+  implementation("uk.co.jemos.podam:podam:8.0.0.RELEASE")
 }
 
 java {
