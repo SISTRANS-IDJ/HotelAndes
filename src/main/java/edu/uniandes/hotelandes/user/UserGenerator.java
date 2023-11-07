@@ -26,10 +26,6 @@ public class UserGenerator {
     @Autowired
     public UserGenerator(UserRoleService userRoleService){
         this.userRoleService = userRoleService;
-        List<Role> roles = userRoleService.getRoles();
-        for (Role r:roles){
-            nRoles.add(r.id());
-        }
     }
     
     private  Byte getValidUserRoleID(){
@@ -39,6 +35,12 @@ public class UserGenerator {
     }
     
     public  User generateUser(Faker faker){
+        if (this.nRoles.size()== 0){
+            List<Role> roles = userRoleService.getRoles();
+            for (Role r:roles){
+                nRoles.add(r.id());
+            }
+        }
         String id_type = "CC";
         String id_number = faker.number().digits(10);
         String password = faker.number().digits(20);
