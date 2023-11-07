@@ -23,27 +23,11 @@ public class UserDataAccessJDBC implements UserDAO {
   }
 
   @Override
-  public int insertUser(User user) {
+  public int insertUser(User user, boolean insertClient) {
     final var sql = "INSERT INTO hotelandes_user(name, email, id_type, id_number, password, role_id) VALUES(?,?, ?, ?, ?, ?)";
 
     String type = jdbcTemplate.queryForObject(
         "select role from hotelandes_user_role where id = ?", String.class, user.role_id());
-
-    // KeyHolder keyHolder = new GeneratedKeyHolder();
-
-    // int result = jdbcTemplate.update(
-    //     new PreparedStatementCreator() {
-    //       public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-    //         PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-    //         statement.setString(1, user.name());
-    //         statement.setString(2, user.email());
-    //         statement.setString(3, user.id_type());
-    //         statement.setString(4, user.id_number());
-    //         statement.setString(5, user.password());
-    //         statement.setByte(6, user.role_id());
-    //         return statement;
-    //       }
-    //     }, keyHolder);
 
     int result = jdbcTemplate.update(
     sql,
@@ -53,12 +37,14 @@ public class UserDataAccessJDBC implements UserDAO {
     user.id_number(),
     user.password(),
     user.role_id());
-
-    Integer thisid = jdbcTemplate.queryForObject(
-        "select id from hotelandes_user where hotelandes_user.email like ?", Integer.class, user.email());
-
-    if (type.equals("CLIENT")) {
-      this.insertClient(thisid);
+    
+    if(insertClient){
+      Integer thisid = jdbcTemplate.queryForObject(
+          "select id from hotelandes_user where hotelandes_user.email like ?", Integer.class, user.email());
+  
+      if (type.equals("CLIENT")) {
+        this.insertClient(thisid);
+      }
     }
     return result;
   }

@@ -14,8 +14,8 @@ public class UserService {
     this.userDAO = userDAO;
   }
 
-  public void createUser(User user) {
-    final var users = userDAO.insertUser(user);
+  public void createUser(User user, boolean insertClient) {
+    final var users = userDAO.insertUser(user, insertClient);
     if (users != 1) {
       throw new IllegalStateException("User creation went wrong");
     }

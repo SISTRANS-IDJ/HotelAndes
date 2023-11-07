@@ -38,18 +38,17 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.jdbc.datasource.init.ScriptUtils;
 
-
 @Service
 class DataGeneratorService {
 
-	private Faker faker =  new Faker();
+	private Faker faker = new Faker();
 
 	@Autowired
 	private UserRoleService userRoleService;
 
 	@Autowired
 	private HotelServiceService hotelServiceService;
-	
+
 	@Autowired
 	private RoomTypeService roomTypeService;
 
@@ -83,96 +82,105 @@ class DataGeneratorService {
 	@Autowired
 	private RoomService roomService;
 
-	@Autowired 
+	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
 	@Autowired
-    private ApplicationContext applicationContext;
+	private ApplicationContext applicationContext;
 
-
-	public void insertData(){
+	public void insertData() {
 		this.insertRoles();
 
 		this.insertRoomTypes();
 		this.insertRooms();
-		this.insertUsers();
 		this.insertServices();
-		//this.insertAccountConsumptions();
 		this.insertProducts();
+		this.insertUsers();
+		this.insertClients();
+		// this.insertAccountConsumptions();
 		this.insertServiceBookings();
 	}
 
-	public void createTables() throws SQLException{
-		DataSource ds = (DataSource)applicationContext.getBean("dataSource");
+	public void createTables() throws SQLException {
+		DataSource ds = (DataSource) applicationContext.getBean("dataSource");
 		Connection c = ds.getConnection();
-		SpringScriptUtil.runScript("sql/schema.sql",c);
+		SpringScriptUtil.runScript("sql/schema.sql", c);
 	}
-	
-	public void dropTables() throws SQLException{
-		DataSource ds = (DataSource)applicationContext.getBean("dataSource");
+
+	public void dropTables() throws SQLException {
+		DataSource ds = (DataSource) applicationContext.getBean("dataSource");
 		Connection c = ds.getConnection();
-		SpringScriptUtil.runScript("sql/tear_down.sql",c);
+		SpringScriptUtil.runScript("sql/tear_down.sql", c);
 	}
 
 	public void insertRoles() {
 		ArrayList<Role> roles = RoleGenerator.generateRoles(this.faker);
-		for (Role role: roles){
+		for (Role role : roles) {
 			userRoleService.createUserRole(role);
 		}
 	}
 
-	public void insertRoomTypes(){
+	public void insertRoomTypes() {
 		ArrayList<RoomType> roomTypes = RoomTypeGenerator.generateBasicRoomTypes(faker);
-		for (RoomType roomType:roomTypes){
+		for (RoomType roomType : roomTypes) {
 			roomTypeService.createRoomType(roomType);
 		}
 	}
 
-	public void insertRooms(){
+	public void insertRooms() {
 		ArrayList<Room> rooms = this.roomGenerator.generateRooms();
-		for (Room r: rooms){
+		for (Room r : rooms) {
 			this.roomService.createRoom(r);
 		}
 	}
 
-	public void insertUsers(){
-		for (int i = 0; i<75000; i++){
+	public void insertUsers() {
+		for (int i = 0; i < 1000; i++) {
 
-			User user =this.userGenerator.generateUser(faker);
-			this.userService.createUser(user);
-
+			User user = this.userGenerator.generateUser(faker);
+			this.userService.createUser(user, false);
 		}
 	}
 
-	public void insertServices(){
+	public void insertClients() {
+		final var sql = """
+				INSERT INTO hotelandes_client (id)
+				SELECT b.id
+				FROM hotelandes_user_role a join hotelandes_user b on a.id = b.role_id
+				where a.role like 'CLIENT'
+					""";
+		jdbcTemplate.update(sql);
+	}
+
+	public void insertServices() {
 		ArrayList<HotelService> services = HotelServiceGenerator.generateHotelServices(this.faker);
-		for (HotelService service: services){
+		for (HotelService service : services) {
 			hotelServiceService.createService(service);
 		}
 	}
 
-	public void insertAccountConsumptions(){
-		for (int i = 0; i<1000; i++){
+	public void insertAccountConsumptions() {
+		for (int i = 0; i < 1000; i++) {
 			AccountConsumption accountConsumption = accountConsumptionGenerator.generateAccountConsumption(faker);
 			this.accountConsumptionService.createAccountConsumption(accountConsumption);
 		}
 	}
 
-	public void insertProducts(){
-		for (int i = 0; i<100; i++){
+	public void insertProducts() {
+		for (int i = 0; i < 100; i++) {
 			Product product = productGenerator.generateProduct(faker);
 			this.productService.createProduct(product);
 		}
 	}
 
-	public void insertServiceBookings(){
-		for (int i = 0; i<100; i++){
+	public void insertServiceBookings() {
+		for (int i = 0; i < 100; i++) {
 			var serviceBooking = serviceBookingGenerator.generateServiceBooking(faker);
 			this.serviceBookingService.createServiceBooking(serviceBooking);
 		}
 	}
 
-	public void deleteDataBase(){
+	public void deleteDataBase() {
 		final ArrayList<String> tables = new ArrayList<String>();
 		tables.add("CONSUMPTION_PLAN");
 		tables.add("HOTEL_ROOM");
@@ -187,8 +195,8 @@ class DataGeneratorService {
 		tables.add("PRODUCT");
 		tables.add("SERVICE_BOOKING");
 		final var sql = "DELETE FROM";
-		for (String s:tables){
-			jdbcTemplate.update(sql + " "+ s);
+		for (String s : tables) {
+			jdbcTemplate.update(sql + " " + s);
 		}
 	}
 
