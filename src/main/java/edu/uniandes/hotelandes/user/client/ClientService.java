@@ -1,5 +1,3 @@
 package edu.uniandes.hotelandes.user.client;
 
-public class ClientService {
-    
-}
+public class ClientService {}

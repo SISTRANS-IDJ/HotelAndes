@@ -8,6 +8,8 @@ public interface UserDAO {
 
   Optional<User> selectUserById(Integer id);
 
+  Optional<User> selectUserByEmail(String name);
+
   List<User> selectUsers();
 
   int updateUser(Integer id, User role);
