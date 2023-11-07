@@ -1,7 +1,7 @@
 package edu.uniandes.hotelandes.user;
 
 public record User(
-    Byte id,
+    Integer id,
     String name,
     String email,
     String id_type,

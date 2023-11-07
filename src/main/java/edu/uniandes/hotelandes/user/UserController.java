@@ -20,7 +20,7 @@ public class UserController {
   }
 
   @GetMapping("{id}")
-  public User getUserId(@PathVariable("id") Short id) {
+  public User getUserId(@PathVariable("id") Integer id) {
     return userService.getUser(id);
   }
 
@@ -30,12 +30,12 @@ public class UserController {
   }
 
   @PutMapping("{id}")
-  public User updateUser(@PathVariable Short id, @RequestBody User user) {
+  public User updateUser(@PathVariable Integer id, @RequestBody User user) {
     return userService.updateUser(id, user);
   }
 
   @DeleteMapping("{id}")
-  public void deleteUser(@PathVariable("id") Short id) {
+  public void deleteUser(@PathVariable("id") Integer id) {
     userService.deleteUser(id);
   }
 }
