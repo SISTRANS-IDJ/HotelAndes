@@ -17,16 +17,14 @@ public class ProductDataAccessJDBC implements ProductDAO {
 
   @Override
   public int insertProduct(Product product) {
-    final var sql =
-        "INSERT INTO product(name, description, price, service_id) VALUES(?, ?, ?, ?)";
+    final var sql = "INSERT INTO product(name, description, price, service_id) VALUES(?, ?, ?, ?)";
     return jdbcTemplate.update(
         sql, product.name(), product.description(), product.cost(), product.serviceId());
   }
 
   @Override
   public Optional<Product> selectProductById(int id) {
-    final var sql =
-        "SELECT id, name, description, cost, service_id FROM product WHERE id = ?";
+    final var sql = "SELECT id, name, description, cost, service_id FROM product WHERE id = ?";
     final var products = jdbcTemplate.query(sql, new ProductRowMapper(), id);
     return products.stream().findFirst();
   }

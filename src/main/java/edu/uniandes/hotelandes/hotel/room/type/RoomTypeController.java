@@ -30,7 +30,7 @@ public class RoomTypeController {
   }
 
   @DeleteMapping("{id}")
-  public void deleteRoomType(@PathVariable Integer id){
+  public void deleteRoomType(@PathVariable Integer id) {
     roomTypeService.deleteRoomType(id);
   }
 

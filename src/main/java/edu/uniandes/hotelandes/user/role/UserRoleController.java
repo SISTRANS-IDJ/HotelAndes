@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("api/v1/user/role")
+@RequestMapping("/api/v1/user/role")
 public class UserRoleController {
   private final UserRoleService userRoleService;
 

@@ -21,12 +21,7 @@ public class HotelServiceDataAccessJDBC implements HotelServiceDAO {
         "INSERT INTO hotelandes_service(name, description, opening_time, closing_time)"
             + " VALUES(?, ?, ?, ?)";
     return jdbcTemplate.update(
-        sql,
-        service.name(),
-        service.description(),
-        service.openingTime(),
-        service.closingTime()
-    );
+        sql, service.name(), service.description(), service.openingTime(), service.closingTime());
   }
 
   @Override
@@ -48,8 +43,8 @@ public class HotelServiceDataAccessJDBC implements HotelServiceDAO {
   @Override
   public int updateService(int id, HotelService service) {
     final var sql =
-        "UPDATE hotelandes_service SET name = ?, description = ?, opening_time = ?, closing_time = ?,"
-            + " WHERE id = ?";
+        "UPDATE hotelandes_service SET name = ?, description = ?, opening_time = ?, closing_time ="
+            + " ?, WHERE id = ?";
     return jdbcTemplate.update(
         sql,
         service.name(),

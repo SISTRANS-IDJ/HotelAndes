@@ -1,3 +1,3 @@
 package edu.uniandes.hotelandes.user.client;
 
-public class ClientController {}
+public class ClientRepository {}

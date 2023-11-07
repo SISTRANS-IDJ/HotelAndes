@@ -1,6 +1,5 @@
 package edu.uniandes.hotelandes.user.role;
 
-import edu.uniandes.hotelandes.exception.EntityAlreadyExists;
 import edu.uniandes.hotelandes.exception.EntityDoesNotExists;
 import edu.uniandes.hotelandes.exception.EntityNotFoundException;
 import java.util.List;
@@ -13,12 +12,13 @@ public class UserRoleService {
 
   @Autowired
   public UserRoleService(RoleDAO roleDAO) {
-    this.roleDAO = (RoleDataAcessJDBC)roleDAO;
+    this.roleDAO = (RoleDataAcessJDBC) roleDAO;
   }
 
   public void createUserRole(Role role) {
     // if (roleDAO.selectRoleById(role.id()).isPresent()) {
-    //   throw new EntityAlreadyExists(String.format("User role with id %d already exists", role.id()));
+    //   throw new EntityAlreadyExists(String.format("User role with id %d already exists",
+    // role.id()));
     // }
 
     roleDAO.insertRole(role);

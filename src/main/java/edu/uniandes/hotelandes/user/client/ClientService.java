@@ -1,5 +1,8 @@
 package edu.uniandes.hotelandes.user.client;
 
+<<<<<<< HEAD
+public class ClientService {}
+=======
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,3 +23,4 @@ public class ClientService {
     }
     
 }
+>>>>>>> feature-data-generation
