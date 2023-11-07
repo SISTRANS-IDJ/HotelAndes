@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserDAO {
-  int insertUser(User user);
+  int insertUser(User user, boolean insertClient);
 
   Optional<User> selectUserById(Integer id);
 
