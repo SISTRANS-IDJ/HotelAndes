@@ -6,6 +6,5 @@ public record Account(
     Double total,
     Double balance,
     String state
-) {
-    
+) {   
 }
