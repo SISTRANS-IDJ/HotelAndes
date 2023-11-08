@@ -106,8 +106,6 @@ class DataGeneratorService {
     //  TODO CLIENT ACCOUNT
     // TODO ACCOUNT CONSUMPTION
     // TODO CONSUMPTION PLAN
-    // TODO PRODUCT
-    // TODO SERVICE BOOKING
 		// this.insertAccounts();
 		// this.insertAccountConsumptions();
 	}
