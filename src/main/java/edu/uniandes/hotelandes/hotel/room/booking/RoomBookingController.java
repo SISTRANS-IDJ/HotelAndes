@@ -20,7 +20,7 @@ public class RoomBookingController {
   }
 
   @GetMapping("{id}")
-  public RoomBooking getRoomBookingId(@PathVariable("id") String id) {
+  public RoomBooking getRoomBookingId(@PathVariable("id") Integer id) {
     return roomBookingService.getRoomBooking(id);
   }
 
@@ -31,12 +31,12 @@ public class RoomBookingController {
 
   @PutMapping("{id}")
   public RoomBooking updateRoomBooking(
-      @PathVariable String id, @RequestBody RoomBooking roomBooking) {
+      @PathVariable Integer id, @RequestBody RoomBooking roomBooking) {
     return roomBookingService.updateRoom(id, roomBooking);
   }
 
   @DeleteMapping("{id}")
-  public void deleteRoomBooking(@PathVariable("id") String id) {
+  public void deleteRoomBooking(@PathVariable("id") Integer id) {
     roomBookingService.deleteRoom(id);
   }
 }

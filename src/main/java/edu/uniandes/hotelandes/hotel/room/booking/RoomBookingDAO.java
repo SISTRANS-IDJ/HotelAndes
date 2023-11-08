@@ -6,11 +6,11 @@ import java.util.Optional;
 public interface RoomBookingDAO {
   int insertRoomBooking(RoomBooking roomBooking);
 
-  Optional<RoomBooking> selectRoomBookingById(String id);
+  Optional<RoomBooking> selectRoomBookingById(Integer id);
 
   List<RoomBooking> selectRoomBookings();
 
-  int updateRoomBooking(String id, RoomBooking roomBooking);
+  int updateRoomBooking(Integer id, RoomBooking roomBooking);
 
-  int deleteRoomBooking(String id);
+  int deleteRoomBooking(Integer id);
 }

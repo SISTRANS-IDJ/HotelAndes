@@ -16,10 +16,10 @@ public class RoomBookingService {
   }
 
   public void createRoomBooking(RoomBooking roomBooking) {
-    var id = UUID.randomUUID().toString();
+    // var id = UUID.randomUUID().toString();
     var roomBookingCreate =
         new RoomBooking(
-            id,
+            0,
             roomBooking.clientId(),
             roomBooking.hotelRoomId(),
             roomBooking.checkIn(),
@@ -31,7 +31,7 @@ public class RoomBookingService {
     }
   }
 
-  public RoomBooking getRoomBooking(String id) {
+  public RoomBooking getRoomBooking(Integer id) {
     return roomBookingDAO
         .selectRoomBookingById(id)
         .orElseThrow(
@@ -44,7 +44,7 @@ public class RoomBookingService {
     return roomBookingDAO.selectRoomBookings();
   }
 
-  public RoomBooking updateRoom(String id, RoomBooking roomBooking) {
+  public RoomBooking updateRoom(Integer id, RoomBooking roomBooking) {
     final var roomBookings = roomBookingDAO.selectRoomBookingById(roomBooking.id());
     if (roomBookings.isPresent()) {
       final var r = roomBookingDAO.updateRoomBooking(id, roomBooking);
@@ -57,7 +57,7 @@ public class RoomBookingService {
     }
   }
 
-  public void deleteRoom(String id) {
+  public void deleteRoom(Integer id) {
     final var roomBooking = roomBookingDAO.selectRoomBookingById(id);
     roomBooking.ifPresentOrElse(
         room -> {

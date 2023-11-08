@@ -34,7 +34,7 @@ public class RoomBookingDataAccessJDBC implements RoomBookingDAO {
   }
 
   @Override
-  public Optional<RoomBooking> selectRoomBookingById(String id) {
+  public Optional<RoomBooking> selectRoomBookingById(Integer id) {
     final var sql =
         """
             SELECT
@@ -57,7 +57,7 @@ public class RoomBookingDataAccessJDBC implements RoomBookingDAO {
   }
 
   @Override
-  public int updateRoomBooking(String id, RoomBooking roomBooking) {
+  public int updateRoomBooking(Integer id, RoomBooking roomBooking) {
     final var sql =
         """
             UPDATE
@@ -76,7 +76,7 @@ public class RoomBookingDataAccessJDBC implements RoomBookingDAO {
   }
 
   @Override
-  public int deleteRoomBooking(String id) {
+  public int deleteRoomBooking(Integer id) {
     final var sql = "DELETE FROM hotel_room_booking WHERE id = ?";
     return jdbcTemplate.update(sql, id);
   }
