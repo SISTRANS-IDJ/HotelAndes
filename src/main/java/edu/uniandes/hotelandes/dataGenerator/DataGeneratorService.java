@@ -79,18 +79,37 @@ class DataGeneratorService {
   @Autowired private ApplicationContext applicationContext;
 
   public void insertData() {
-    this.insertRoles();
+    /* 
+    * hotelandes_user_role
+     * hotelandes_room_type
+		 * hotel_room
+		 * hotelandes_service
+		 * hotelandes_user
+		 * hotelandes_client
+		 * hotel_room_booking
+		 * hotelandes_client_account
+		 * hotelandes_account_consumption
+		 * consumption_plan
+		 * product
+		 * service_booking
+		 */
 
+    this.insertRoles();
 		this.insertRoomTypes();
 		this.insertRooms();
 		this.insertServices();
 		this.insertProducts();
 		this.insertUsers();
 		this.insertClients();
-
+		this.insertServiceBookings();
+    // TODO BOOKING
+    //  TODO CLIENT ACCOUNT
+    // TODO ACCOUNT CONSUMPTION
+    // TODO CONSUMPTION PLAN
+    // TODO PRODUCT
+    // TODO SERVICE BOOKING
 		// this.insertAccounts();
 		// this.insertAccountConsumptions();
-		this.insertServiceBookings();
 	}
 
   public void createTables() throws SQLException {
