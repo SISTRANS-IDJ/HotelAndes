@@ -15,7 +15,13 @@ public class AccountGenerator {
 
     @Autowired
     private RoomBookingService roomBookingService;
-
+    
+    private Integer getValidRoomBookingId() {
+        List<RoomBooking> roomBookings = roomBookingService.getRoomBookings();
+        Random random = new Random();
+        Integer id = roomBookings.get(random.nextInt(roomBookings.size())).id();
+        return id;
+    }
     public Account generateAccount(Faker faker) {
         int roomBookingId = getValidRoomBookingId();
         Double total = faker.number().randomDouble(2, 0, 1000000);
@@ -24,11 +30,5 @@ public class AccountGenerator {
         return new Account(0, roomBookingId, total, balance, State.valueOf(state));
     }
     
-    private Integer getValidRoomBookingId() {
-        List<RoomBooking> roomBookings = roomBookingService.getRoomBookings();
-        Random random = new Random();
-        Integer id = roomBookings.get(random.nextInt(roomBookings.size())).id();
-        return id;
-    }
 
 }
