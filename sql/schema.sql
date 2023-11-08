@@ -45,8 +45,8 @@ CREATE TABLE hotel_room_booking
     id                  NUMBER(19) GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     client_id           NUMBER(19),
     hotel_room_id       NUMBER(10) NOT NULL,
-    check_in            TIMESTAMP[0]       NOT NULL,
-    check_out           TIMESTAMP[0]       NOT NULL,
+    check_in            TIMESTAMP       NOT NULL,
+    check_out           TIMESTAMP       NOT NULL,
     consumption_plan_id NUMBER(3),
     FOREIGN KEY (hotel_room_id) REFERENCES hotel_room (id),
     FOREIGN KEY (client_id) REFERENCES hotelandes_client (id)
