@@ -17,12 +17,10 @@ public class ServiceBookingGenerator {
 
   @Autowired
   private ClientService clientService;
-  @Autowired
-  private UserService userService;
 
   public ServiceBooking generateServiceBooking(Faker faker) {
-    Date bookingStart = faker.date().birthday();
-    Date bookingEnd = faker.date().birthday();
+    Date bookingStart = faker.date().between(new Date("01/01/2019 00:00"), new Date("01/01/2020 24:00"));
+    Date bookingEnd = faker.date().between(bookingStart, new Date("01/01/2020 24:00"));
     Byte serviceId = (byte) getValidServiceId();
     Byte userId = (byte) getValidClientId();
     return new ServiceBooking(null, bookingStart, bookingEnd, serviceId, userId);
