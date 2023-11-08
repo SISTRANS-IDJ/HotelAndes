@@ -1,7 +1,6 @@
 package edu.uniandes.hotelandes.dataGenerator;
 
 import edu.uniandes.hotelandes.account.consumption.AccountConsumption;
-import edu.uniandes.hotelandes.account.consumption.AccountConsumptionController;
 import edu.uniandes.hotelandes.account.consumption.AccountConsumptionGenerator;
 import edu.uniandes.hotelandes.account.consumption.AccountConsumptionService;
 import edu.uniandes.hotelandes.hotel.consumptionPlan.ConsumptionPlanGenerator;
@@ -153,7 +152,7 @@ class DataGeneratorService {
   }
 
   public void insertUsers() {
-    for (int i = 0; i < 100; i++) {
+    for (int i = 0; i < 10; i++) {
 
       User user = this.userGenerator.generateUser(faker);
       this.userService.createUser(user, false);
@@ -187,20 +186,20 @@ class DataGeneratorService {
   }
 
   public void insertProducts() {
-    for (int i = 0; i < 100; i++) {
+    for (int i = 0; i < 10; i++) {
       Product product = productGenerator.generateProduct(faker);
       this.productService.createProduct(product);
     }
   }
 
 	public void insertServiceBookings() {
-		for (int i = 0; i < 100; i++) {
+		for (int i = 0; i < 10; i++) {
 			var serviceBooking = serviceBookingGenerator.generateServiceBooking(faker);
 			this.serviceBookingService.createServiceBooking(serviceBooking);
 		}
 	}
 	public void insertAccounts() {
-		for (int i = 0; i < 100; i++) {
+		for (int i = 0; i < 10; i++) {
 			var account = accountGenerator.generateAccount(faker);
 			this.accountService.createAccount(account);
 		}
