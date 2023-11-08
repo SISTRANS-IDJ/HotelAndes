@@ -23,11 +23,15 @@ public class AccountRepository implements AccountDAO {
     public int insertAccount(Account account) {
         final var sql = """
                 INSERT INTO hotelandes_client_account ( room_booking_id, total, balance, state)
-                VALUES (?,0,0,'OPEN')
+                VALUES (?,?,?,?)
                     """;
         return jdbcTemplate.update(
                 sql,
-                account.room_booking_id());
+                account.room_booking_id(),
+                account.total(),
+                account.balance(),
+                account.state().name()
+                );
     }
 
     @Override

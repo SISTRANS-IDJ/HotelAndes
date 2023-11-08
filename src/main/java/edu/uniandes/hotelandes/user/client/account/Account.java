@@ -5,6 +5,6 @@ public record Account(
     Integer room_booking_id,
     Double total,
     Double balance,
-    String state
+    State state
 ) {   
 }
