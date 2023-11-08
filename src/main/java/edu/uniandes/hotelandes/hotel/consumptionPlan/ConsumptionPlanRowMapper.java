@@ -11,7 +11,7 @@ public class ConsumptionPlanRowMapper implements RowMapper<ConsumptionPlan> {
         rs.getInt("id"),
         rs.getString("plan_name"),
         rs.getString("plan_description"),
-        rs.getFloat("stay_discount"),
-        rs.getFloat("fixed_cost"));
+        rs.getDouble("stay_discount"),
+        rs.getDouble("fixed_cost"));
   }
 }

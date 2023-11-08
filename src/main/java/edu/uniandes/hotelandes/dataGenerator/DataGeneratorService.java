@@ -4,6 +4,8 @@ import edu.uniandes.hotelandes.account.consumption.AccountConsumption;
 import edu.uniandes.hotelandes.account.consumption.AccountConsumptionController;
 import edu.uniandes.hotelandes.account.consumption.AccountConsumptionGenerator;
 import edu.uniandes.hotelandes.account.consumption.AccountConsumptionService;
+import edu.uniandes.hotelandes.hotel.consumptionPlan.ConsumptionPlanGenerator;
+import edu.uniandes.hotelandes.hotel.consumptionPlan.ConsumptionPlanService;
 import edu.uniandes.hotelandes.hotel.room.Room;
 import edu.uniandes.hotelandes.hotel.room.RoomGenerator;
 import edu.uniandes.hotelandes.hotel.room.RoomService;
@@ -71,6 +73,9 @@ class DataGeneratorService {
 	@Autowired
 	private AccountService accountService;
 
+    @Autowired
+    private ConsumptionPlanService consumptionPlanService;
+
 	@Autowired
 	private RoomService roomService;
 
@@ -96,6 +101,7 @@ class DataGeneratorService {
 
     this.insertRoles();
 		this.insertRoomTypes();
+        this.insertConsumptionPlans();
 		this.insertRooms();
 		this.insertServices();
 		this.insertProducts();
@@ -108,6 +114,7 @@ class DataGeneratorService {
     // TODO CONSUMPTION PLAN
 		// this.insertAccounts();
 		// this.insertAccountConsumptions();
+		//this.insertServiceBookings();
 	}
 
   public void createTables() throws SQLException {
@@ -196,6 +203,13 @@ class DataGeneratorService {
 			this.accountService.createAccount(account);
 		}
 	}
+
+    public void insertConsumptionPlans() {
+        var consumptionPlans = ConsumptionPlanGenerator.generateConusmptionPlan(faker);
+        for (var consumptionPlan : consumptionPlans) {
+            consumptionPlanService.createConsumptionPlan(consumptionPlan);
+        }
+    }
 
 	public void deleteDataBase() {
 		final ArrayList<String> tables = new ArrayList<String>();
