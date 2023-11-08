@@ -1,5 +1,7 @@
 package edu.uniandes.hotelandes.hotel.room.booking;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,22 +16,25 @@ public class RoomBookingDataAccessJDBC implements RoomBookingDAO {
   public RoomBookingDataAccessJDBC(JdbcTemplate jdbcTemplate) {
     this.jdbcTemplate = jdbcTemplate;
   }
+  
+  public Date convertToDateViaSqlDate(LocalDate dateToConvert) {
+    return java.sql.Date.valueOf(dateToConvert);
+}
 
   @Override
   public int insertRoomBooking(RoomBooking roomBooking) {
     final var sql =
         """
             INSERT INTO
-            hotel_room_booking(id, client_id, hotel_room_id,check_in, check_out, consumption_plan_id)
-            VALUES(?, ?, ?, ?, ?, ?)
+            hotel_room_booking( client_id, hotel_room_id,check_in, check_out, consumption_plan_id)
+            VALUES( ?, ?, ?, ?, ?)
             """;
     return jdbcTemplate.update(
         sql,
-        roomBooking.id(),
         roomBooking.clientId(),
         roomBooking.hotelRoomId(),
-        roomBooking.checkIn(),
-        roomBooking.checkOut(),
+        convertToDateViaSqlDate(roomBooking.checkIn()),
+        convertToDateViaSqlDate(roomBooking.checkOut()),
         roomBooking.consumptionPlanId());
   }
 

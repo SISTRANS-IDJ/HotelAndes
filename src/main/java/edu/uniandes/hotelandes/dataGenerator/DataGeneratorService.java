@@ -9,6 +9,9 @@ import edu.uniandes.hotelandes.hotel.consumptionPlan.ConsumptionPlanService;
 import edu.uniandes.hotelandes.hotel.room.Room;
 import edu.uniandes.hotelandes.hotel.room.RoomGenerator;
 import edu.uniandes.hotelandes.hotel.room.RoomService;
+import edu.uniandes.hotelandes.hotel.room.booking.BookingGenerator;
+import edu.uniandes.hotelandes.hotel.room.booking.RoomBooking;
+import edu.uniandes.hotelandes.hotel.room.booking.RoomBookingService;
 import edu.uniandes.hotelandes.hotel.room.hotelService.product.Product;
 import edu.uniandes.hotelandes.hotel.room.hotelService.product.ProductGenerator;
 import edu.uniandes.hotelandes.hotel.room.hotelService.product.ProductService;
@@ -43,79 +46,100 @@ class DataGeneratorService {
 
   private Faker faker = new Faker();
 
-  @Autowired private UserRoleService userRoleService;
+  @Autowired
+  private UserRoleService userRoleService;
 
-  @Autowired private HotelServiceService hotelServiceService;
+  @Autowired
+  private HotelServiceService hotelServiceService;
 
-  @Autowired private RoomTypeService roomTypeService;
+  @Autowired
+  private RoomTypeService roomTypeService;
 
-  @Autowired private UserService userService;
+  @Autowired
+  private UserService userService;
 
-  @Autowired private UserGenerator userGenerator;
+  @Autowired
+  private UserGenerator userGenerator;
 
-  @Autowired private AccountConsumptionService accountConsumptionService;
+  @Autowired
+  private AccountConsumptionService accountConsumptionService;
 
-  @Autowired private AccountConsumptionGenerator accountConsumptionGenerator;
+  @Autowired
+  private AccountConsumptionGenerator accountConsumptionGenerator;
 
-  @Autowired private RoomGenerator roomGenerator;
+  @Autowired
+  private RoomGenerator roomGenerator;
 
-  @Autowired private ProductGenerator productGenerator;
+  @Autowired
+  private ProductGenerator productGenerator;
 
-  @Autowired private ProductService productService;
+  @Autowired
+  private ProductService productService;
 
-  @Autowired private ServiceBookingGenerator serviceBookingGenerator;
+  @Autowired
+  private ServiceBookingGenerator serviceBookingGenerator;
 
-  @Autowired private ServiceBookingService serviceBookingService;
+  @Autowired
+  private ServiceBookingService serviceBookingService;
 
-	@Autowired
-	private AccountGenerator accountGenerator;
+  @Autowired
+  private AccountGenerator accountGenerator;
 
-	@Autowired
-	private AccountService accountService;
+  @Autowired
+  private AccountService accountService;
 
-    @Autowired
-    private ConsumptionPlanService consumptionPlanService;
+  @Autowired
+  private ConsumptionPlanService consumptionPlanService;
 
-	@Autowired
-	private RoomService roomService;
+  @Autowired
+  private RoomService roomService;
 
-  @Autowired private JdbcTemplate jdbcTemplate;
+  @Autowired
+  private BookingGenerator bookingGenerator;
 
-  @Autowired private ApplicationContext applicationContext;
+  @Autowired
+  private RoomBookingService roomBookingService;
+
+  @Autowired
+  private JdbcTemplate jdbcTemplate;
+
+  @Autowired
+  private ApplicationContext applicationContext;
 
   public void insertData() {
-    /* 
-    * hotelandes_user_role
+    /*
+     * hotelandes_user_role
      * hotelandes_room_type
-		 * hotel_room
-		 * hotelandes_service
-		 * hotelandes_user
-		 * hotelandes_client
-		 * hotel_room_booking
-		 * hotelandes_client_account
-		 * hotelandes_account_consumption
-		 * consumption_plan
-		 * product
-		 * service_booking
-		 */
+     * hotel_room
+     * hotelandes_service
+     * hotelandes_user
+     * hotelandes_client
+     * hotel_room_booking
+     * hotelandes_client_account
+     * hotelandes_account_consumption
+     * consumption_plan
+     * product
+     * service_booking
+     */
 
     this.insertRoles();
-		this.insertRoomTypes();
-        this.insertConsumptionPlans();
-		this.insertRooms();
-		this.insertServices();
-		this.insertProducts();
-		this.insertUsers();
-		this.insertClients();
-		this.insertServiceBookings();
+    this.insertRoomTypes();
+    this.insertConsumptionPlans();
+    this.insertRooms();
+    this.insertServices();
+    this.insertProducts();
+    this.insertUsers();
+    this.insertClients();
+    this.insertServiceBookings();
+    this.insertConsumptionPlans();
     // TODO BOOKING
-    //  TODO CLIENT ACCOUNT
+    this.insertRoomBookings();
+    // TODO CLIENT ACCOUNT
     // TODO ACCOUNT CONSUMPTION
-    // TODO CONSUMPTION PLAN
-		// this.insertAccounts();
-		// this.insertAccountConsumptions();
-		//this.insertServiceBookings();
-	}
+    // this.insertAccounts();
+    // this.insertAccountConsumptions();
+    // this.insertServiceBookings();
+  }
 
   public void createTables() throws SQLException {
     DataSource ds = (DataSource) applicationContext.getBean("dataSource");
@@ -159,13 +183,12 @@ class DataGeneratorService {
   }
 
   public void insertClients() {
-    final var sql =
-        """
-				INSERT INTO hotelandes_client (id)
-				SELECT b.id
-				FROM hotelandes_user_role a join hotelandes_user b on a.id = b.role_id
-				where a.role like 'CLIENT'
-					""";
+    final var sql = """
+        INSERT INTO hotelandes_client (id)
+        SELECT b.id
+        FROM hotelandes_user_role a join hotelandes_user b on a.id = b.role_id
+        where a.role like 'CLIENT'
+        	""";
     jdbcTemplate.update(sql);
   }
 
@@ -178,8 +201,7 @@ class DataGeneratorService {
 
   public void insertAccountConsumptions() {
     for (int i = 0; i < 1000; i++) {
-      AccountConsumption accountConsumption =
-          accountConsumptionGenerator.generateAccountConsumption(faker);
+      AccountConsumption accountConsumption = accountConsumptionGenerator.generateAccountConsumption(faker);
       this.accountConsumptionService.createAccountConsumption(accountConsumption);
     }
   }
@@ -191,44 +213,52 @@ class DataGeneratorService {
     }
   }
 
-	public void insertServiceBookings() {
-		for (int i = 0; i < 100; i++) {
-			var serviceBooking = serviceBookingGenerator.generateServiceBooking(faker);
-			this.serviceBookingService.createServiceBooking(serviceBooking);
-		}
-	}
-	public void insertAccounts() {
-		for (int i = 0; i < 100; i++) {
-			var account = accountGenerator.generateAccount(faker);
-			this.accountService.createAccount(account);
-		}
-	}
-
-    public void insertConsumptionPlans() {
-        var consumptionPlans = ConsumptionPlanGenerator.generateConusmptionPlan(faker);
-        for (var consumptionPlan : consumptionPlans) {
-            consumptionPlanService.createConsumptionPlan(consumptionPlan);
-        }
+  public void insertServiceBookings() {
+    for (int i = 0; i < 100; i++) {
+      var serviceBooking = serviceBookingGenerator.generateServiceBooking(faker);
+      this.serviceBookingService.createServiceBooking(serviceBooking);
     }
+  }
 
-	public void deleteDataBase() {
-		final ArrayList<String> tables = new ArrayList<String>();
-		tables.add("CONSUMPTION_PLAN");
-		tables.add("HOTEL_ROOM");
-		tables.add("HOTEL_ROOM_BOOKING");
-		tables.add("HOTEL_ROOM_TYPE");
-		tables.add("HOTELANDES_ACCOUNT_CONSUMPTION");
-		tables.add("HOTELANDES_CLIENT");
-		tables.add("HOTELANDES_CLIENT_ACCOUNT");
-		tables.add("HOTELANDES_SERVICE");
-		tables.add("HOTELANDES_USER");
-		tables.add("HOTELANDES_USER_ROLE");
-		tables.add("PRODUCT");
-		tables.add("SERVICE_BOOKING");
-		final var sql = "DELETE FROM";
-		for (String s : tables) {
-			jdbcTemplate.update(sql + " " + s);
-		}
-	}
+  public void insertRoomBookings(){
+    for (int i = 0; i < 100; i++) {
+      RoomBooking roomBooking = bookingGenerator.generateRoomBooking();
+      this.roomBookingService.createRoomBooking(roomBooking);
+    }
+  }
+
+  public void insertAccounts() {
+    for (int i = 0; i < 100; i++) {
+      var account = accountGenerator.generateAccount(faker);
+      this.accountService.createAccount(account);
+    }
+  }
+
+  public void insertConsumptionPlans() {
+    var consumptionPlans = ConsumptionPlanGenerator.generateConusmptionPlan(faker);
+    for (var consumptionPlan : consumptionPlans) {
+      consumptionPlanService.createConsumptionPlan(consumptionPlan);
+    }
+  }
+
+  public void deleteDataBase() {
+    final ArrayList<String> tables = new ArrayList<String>();
+    tables.add("CONSUMPTION_PLAN");
+    tables.add("HOTEL_ROOM");
+    tables.add("HOTEL_ROOM_BOOKING");
+    tables.add("HOTEL_ROOM_TYPE");
+    tables.add("HOTELANDES_ACCOUNT_CONSUMPTION");
+    tables.add("HOTELANDES_CLIENT");
+    tables.add("HOTELANDES_CLIENT_ACCOUNT");
+    tables.add("HOTELANDES_SERVICE");
+    tables.add("HOTELANDES_USER");
+    tables.add("HOTELANDES_USER_ROLE");
+    tables.add("PRODUCT");
+    tables.add("SERVICE_BOOKING");
+    final var sql = "DELETE FROM";
+    for (String s : tables) {
+      jdbcTemplate.update(sql + " " + s);
+    }
+  }
 
 }
