@@ -1,3 +1,12 @@
+CREATE TABLE consumption_plan 
+(
+    id NUMBER(19) GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    plan_name VARCHAR2(100 CHAR) NOT NULL,
+    stay_discount NUMBER ,
+    fixed_cost NUMBER ,
+    plan_description VARCHAR2(500 CHAR)
+);
+
 CREATE TABLE hotelandes_user_role
 (
     id          NUMBER(2) GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -40,6 +49,7 @@ CREATE TABLE hotel_room
     FOREIGN KEY (room_type_id) REFERENCES hotel_room_type (id)
 );
 
+
 CREATE TABLE hotel_room_booking
 (
     id                  NUMBER(19) GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -47,9 +57,10 @@ CREATE TABLE hotel_room_booking
     hotel_room_id       NUMBER(10) NOT NULL,
     check_in            TIMESTAMP       NOT NULL,
     check_out           TIMESTAMP       NOT NULL,
-    consumption_plan_id NUMBER(3),
+    consumption_plan_id NUMBER(19),
     FOREIGN KEY (hotel_room_id) REFERENCES hotel_room (id),
     FOREIGN KEY (client_id) REFERENCES hotelandes_client (id)
+    FOREIGN KEY (consumption_plan_id) REFERENCES consumption_plan (id)
 );
 
 CREATE TABLE hotelandes_client_account
@@ -83,14 +94,6 @@ CREATE TABLE hotelandes_account_consumption
     FOREIGN KEY (service_id) REFERENCES hotelandes_service (id)
 );
 
-CREATE TABLE consumption_plan 
-(
-    id NUMBER(19) GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    plan_name VARCHAR2(100 CHAR) NOT NULL,
-    stay_discount NUMBER ,
-    fixed_cost NUMBER ,
-    plan_description VARCHAR2(500 CHAR)
-);
 
 CREATE TABLE product
 (
