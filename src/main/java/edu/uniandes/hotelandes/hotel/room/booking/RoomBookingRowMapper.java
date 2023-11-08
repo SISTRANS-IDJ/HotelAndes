@@ -13,6 +13,6 @@ public class RoomBookingRowMapper implements RowMapper<RoomBooking> {
         rs.getInt("hotel_room_id"),
         rs.getDate("check_in"),
         rs.getDate("check_out"),
-        rs.getByte("consumption_plan_id"));
+        rs.getInt("consumption_plan_id"));
   }
 }
