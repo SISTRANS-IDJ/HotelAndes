@@ -27,7 +27,7 @@ public class AccountGenerator {
         Double total = faker.number().randomDouble(2, 0, 1000000);
         Double balance = faker.number().randomDouble(2, 0, 1000000);
         String state = faker.options().option("OPEN", "CLOSED");
-        return new Account(0, roomBookingId, total, balance, State.valueOf(state));
+        return new Account(0, roomBookingId, total, balance, state);
     }
     
 

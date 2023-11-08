@@ -33,8 +33,8 @@ public class RoomBookingDataAccessJDBC implements RoomBookingDAO {
         sql,
         roomBooking.clientId(),
         roomBooking.hotelRoomId(),
-        convertToDateViaSqlDate(roomBooking.checkIn()),
-        convertToDateViaSqlDate(roomBooking.checkOut()),
+        roomBooking.checkIn(),
+        roomBooking.checkOut(),
         roomBooking.consumptionPlanId());
   }
 
@@ -55,7 +55,7 @@ public class RoomBookingDataAccessJDBC implements RoomBookingDAO {
     final var sql =
         """
             SELECT
-            id, client_id, hotel_room_id,check_in, check_out, consumption_plan_id
+            id, client_id, hotel_room_id, check_in, check_out, consumption_plan_id
             FROM hotel_room_booking
             """;
     return jdbcTemplate.query(sql, new RoomBookingRowMapper());

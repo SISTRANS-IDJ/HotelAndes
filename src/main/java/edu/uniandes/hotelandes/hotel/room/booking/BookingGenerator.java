@@ -2,6 +2,7 @@ package edu.uniandes.hotelandes.hotel.room.booking;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,8 +72,8 @@ public class BookingGenerator {
         Integer clientId = this.getValidClientID();
         Integer hotelRoomId = this.getValidRoomID();
         Integer consumptionPlanId = this.getValidPlanID();
-        LocalDate checkIn = factory.manufacturePojo(LocalDate.class);
-        LocalDate checkOut = factory.manufacturePojo(LocalDate.class);
+        Date checkIn = factory.manufacturePojo(Date.class);
+        Date checkOut = factory.manufacturePojo(Date.class);
         RoomBooking newBooking = new RoomBooking((Integer)0,clientId, hotelRoomId, checkIn, checkOut, consumptionPlanId);
         return newBooking;
     }

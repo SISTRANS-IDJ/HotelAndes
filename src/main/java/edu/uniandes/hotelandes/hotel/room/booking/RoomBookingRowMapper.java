@@ -19,10 +19,10 @@ public class RoomBookingRowMapper implements RowMapper<RoomBooking> {
   public RoomBooking mapRow(ResultSet rs, int i) throws SQLException {
     return new RoomBooking(
         rs.getInt("id"),
-        rs.getInt("clientId"),
+        rs.getInt("client_id"),
         rs.getInt("hotel_room_id"),
-        convertToLocalDateViaInstant(rs.getDate("check_in")),
-        convertToLocalDateViaInstant(rs.getDate("check_out")),
+        rs.getDate("check_in"),
+        rs.getDate("check_out"),
         rs.getInt("consumption_plan_id"));
   }
 }

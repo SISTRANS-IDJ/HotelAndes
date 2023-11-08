@@ -69,7 +69,7 @@ CREATE TABLE hotelandes_client_account
     room_booking_id NUMBER(19) NOT NULL,
     total NUMBER(20,2) NOT NULL,
     balance NUMBER(20,2) NOT NULL,
-    state           VARCHAR2(8 CHAR)  NOT NULL CHECK ( state in ('OPEN', 'CLOSE') ),
+    state           VARCHAR2(8 CHAR)  NOT NULL CHECK ( state in ('OPEN', 'CLOSED') ),
     FOREIGN KEY (room_booking_id) REFERENCES hotel_room_booking (id)
 );
 
@@ -89,7 +89,7 @@ CREATE TABLE hotelandes_account_consumption
     account_id       NUMBER(19)        NOT NULL,
     service_id       NUMBER(19)        NOT NULL,
     consumption_date DATE              NOT NULL,
-    description      VARCHAR2(64 CHAR) NOT NULL,
+    description      VARCHAR2(1000 CHAR) NOT NULL,
     cost             NUMBER(19, 4)     NOT NULL,
     FOREIGN KEY (service_id) REFERENCES hotelandes_service (id)
 );

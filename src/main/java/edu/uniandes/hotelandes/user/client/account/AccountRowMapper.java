@@ -14,6 +14,6 @@ public class AccountRowMapper implements RowMapper<Account> {
         rs.getInt("room_booking_id"),
         rs.getDouble("total"),
         rs.getDouble("balance"),
-        State.valueOf(rs.getString("state")));
+        rs.getString("state"));
   }
 }

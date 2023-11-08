@@ -131,13 +131,12 @@ class DataGeneratorService {
     this.insertClients();
     this.insertServiceBookings();
     this.insertConsumptionPlans();
-    // TODO BOOKING
     this.insertRoomBookings();
-    // TODO CLIENT ACCOUNT
-    // TODO ACCOUNT CONSUMPTION
-    // this.insertAccounts();
-    // this.insertAccountConsumptions();
-    // this.insertServiceBookings();
+    this.insertAccounts();
+    this.insertAccountConsumptions();
+
+
+
   }
 
   public void createTables() throws SQLException {
@@ -174,7 +173,7 @@ class DataGeneratorService {
   }
 
   public void insertUsers() {
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 100; i++) {
 
       User user = this.userGenerator.generateUser(faker);
       this.userService.createUser(user, false);
@@ -199,7 +198,7 @@ class DataGeneratorService {
   }
 
   public void insertAccountConsumptions() {
-    for (int i = 0; i < 1000; i++) {
+    for (int i = 0; i < 100; i++) {
       AccountConsumption accountConsumption = accountConsumptionGenerator.generateAccountConsumption(faker);
       this.accountConsumptionService.createAccountConsumption(accountConsumption);
     }

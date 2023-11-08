@@ -30,7 +30,7 @@ public class AccountRepository implements AccountDAO {
         account.room_booking_id(),
         account.total(),
         account.balance(),
-        account.state().name());
+        account.state());
   }
 
   @Override

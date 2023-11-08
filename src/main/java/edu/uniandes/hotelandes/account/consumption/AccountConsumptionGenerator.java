@@ -4,6 +4,7 @@ import edu.uniandes.hotelandes.hotel.room.service.HotelServiceService;
 import java.util.Date;
 import java.util.Random;
 import net.datafaker.Faker;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +20,7 @@ public class AccountConsumptionGenerator {
     String description = faker.lorem().paragraph();
     Double cost = faker.number().randomDouble(2, 0, 1000000);
     return new AccountConsumption(
-        null, accountId, (long) serviceId, consumptionDate, description, cost);
+        (long)0, accountId, (long) serviceId, consumptionDate, description, cost);
   }
 
   private Long getValidServiceId() {
